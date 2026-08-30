@@ -1,0 +1,9 @@
+paths:
+  data_root: "D:/Graduation-project-data"
+  raw: "D:/Graduation-project-data/raw"
+  processed: "D:/Graduation-project-data/processed"
+  frames: "D:/Graduation-project-data/frames"
+  regions: "D:/Graduation-project-data/regions"
+  checkpoints: "D:/Graduation-project-data/checkpoints"
+  results: "D:/Graduation-project-data/results"
+  temp: "D:/Graduation-project-data/temp"

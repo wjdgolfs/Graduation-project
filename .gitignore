@@ -1,0 +1,33 @@
+# Python virtual environment
+.venv/
+
+# PyCharm
+.idea/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local dataset directories
+data/
+datasets/
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# Video files
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
