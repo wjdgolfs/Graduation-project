@@ -7,3 +7,11 @@ paths:
   checkpoints: "D:/Graduation-project-data/checkpoints"
   results: "D:/Graduation-project-data/results"
   temp: "D:/Graduation-project-data/temp"
+
+preprocessing:
+  num_frames: 16
+
+scene_detection:
+  hard_cut_threshold: 0.20
+  gradual_threshold: 0.005
+  min_gradual_frames: 5
