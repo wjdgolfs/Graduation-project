@@ -1,17 +1,35 @@
+# 여러 실행 파일이 함께 사용하는 설정입니다. 경로와 기준값을 한곳에서 관리합니다.
+# 아래 경로는 이 PC의 D: 드라이브를 기준으로 합니다. 데이터 위치를 옮기면 각 경로도 수정하세요.
 paths:
+  # 데이터 저장소의 최상위 폴더. 환경 점검 코드에서 존재 여부를 확인합니다.
   data_root: "D:/Graduation-project-data"
+  # 원본 영상용으로 마련한 경로. 현재 스크립트는 raw 대신 temp의 테스트 영상을 읽습니다.
   raw: "D:/Graduation-project-data/raw"
+  # 가공 데이터용 예약 경로. 현재 코드에서는 사용하지 않습니다.
   processed: "D:/Graduation-project-data/processed"
+  # extract_frames.py가 골라낸 JPG 이미지의 저장 위치입니다.
   frames: "D:/Graduation-project-data/frames"
+  # 관심 영역 데이터용 예약 경로. 현재 코드에서는 사용하지 않습니다.
   regions: "D:/Graduation-project-data/regions"
+  # 모델 학습 상태 저장용 예약 경로. 현재 코드에는 모델 학습/저장이 없습니다.
   checkpoints: "D:/Graduation-project-data/checkpoints"
+  # 장면 변화 점수 CSV, 장면 번호 CSV, 점수 그래프 PNG를 저장합니다.
   results: "D:/Graduation-project-data/results"
+  # create_test_video.py가 만드는 실험용 MP4를 저장합니다.
   temp: "D:/Graduation-project-data/temp"
 
 preprocessing:
+  # 영상 전체에서 균등 간격으로 골라 저장할 이미지 수입니다.
+  # 장면 전환 탐지는 이 값과 무관하게 원본 영상의 프레임을 순차 비교합니다.
   num_frames: 16
 
 scene_detection:
+  # 점수는 이웃한 이미지의 평균 밝기 차이를 0~1로 정규화한 값이며 확률이 아닙니다.
+  # 급격한 전환을 판단하는 높은 기준값입니다. 낮추면 더 작은 변화도 후보가 됩니다.
+  # detect_scene_transition.py에서는 후보 구간 길이가 2 이하라는 조건도 필요합니다.
   hard_cut_threshold: 0.20
+  # 연속된 변화 구간을 모으기 시작하는 낮은 기준값입니다.
   gradual_threshold: 0.005
+  # 점진적 전환으로 판단하는 데 필요한 최소 연속 프레임 수이며, 초 단위가 아닙니다.
+  # create_scene_signal.py는 높은 기준 미만인 후보만 모으므로 탐지 코드와 판정이 다를 수 있습니다.
   min_gradual_frames: 5
