@@ -11,9 +11,9 @@ paths:
   frames: "D:/Graduation-project-data/frames"
   # 관심 영역 데이터용 예약 경로. 현재 코드에서는 사용하지 않습니다.
   regions: "D:/Graduation-project-data/regions"
-  # 모델 학습 상태 저장용 예약 경로. 현재 코드에는 모델 학습/저장이 없습니다.
+  # 모델 가중치 폴더. FTCN·MediaPipe·XceptionNet 가중치와 학습한 모델(paper_model.checkpoint_dir)이 이 아래에 있습니다.
   checkpoints: "D:/Graduation-project-data/checkpoints"
-  # 장면 변화 점수 CSV, 장면 번호 CSV, 점수 그래프 PNG를 저장합니다.
+  # 실험 결과 폴더. 장면 변화 점수·그래프, 학습 로그와 테스트 지표(paper_model.results_dir) 등을 저장합니다.
   results: "D:/Graduation-project-data/results"
   # create_test_video.py가 만드는 실험용 MP4를 저장합니다.
   temp: "D:/Graduation-project-data/temp"
@@ -58,3 +58,69 @@ ftcn:
   repo_dir: "third_party/FTCN"
   # FTCN 과 얼굴 검출·랜드마크 가중치 3개가 있는 폴더입니다.
   weights_dir: "D:/Graduation-project-data/checkpoints/FTCN"
+
+mediapipe:
+  # 얼굴 랜드마크(478점) 모델 파일. scripts/setup_mediapipe.py 가 받고 sha256 을 확인합니다.
+  face_landmarker: "D:/Graduation-project-data/checkpoints/mediapipe/face_landmarker.task"
+
+preprocess:
+  # 얼굴 전처리(preprocessing/extract_faces.py) 설정. 원 논문(이대현·문종섭 2020): 영상마다 30프레임, 240x240 RGB
+  frames: 30
+  # consecutive: start_frame 부터 연속 프레임 / uniform: 영상 전체에서 고르게
+  # 논문이 "인접한 프레임 사이의 불연속"을 학습하므로 연속 프레임을 기본으로 둡니다.
+  sampling: "consecutive"
+  start_frame: 0
+  crop_size: 240
+  # 랜드마크를 감싼 상자에서 가장 긴 변의 몇 배를 잘라낼지. 얼굴 경계 바깥까지 담으려고 넉넉히 잡습니다.
+  crop_scale: 1.3
+  # 크롭 상자 떨림을 줄이는 이동 평균 창 크기(프레임 수). 1 이하면 끕니다.
+  box_smoothing: 5
+  # 배경 통계용 전체 프레임 흑백 축소판의 긴 변 픽셀 수
+  thumb_max_side: 160
+  # 배경에서 뺄 영역 = 얼굴 상자의 몇 배. 머리카락·목·어깨처럼 사람과 함께 움직이는 부분을 빼기 위해 넓게 잡습니다.
+  background_exclusion_scale: 2.0
+  # 얼굴 찾기(두 단계): 앞 프레임 얼굴 상자를 search_window_scale 배로 넓힌 영역만 잘라 MediaPipe 에 넣습니다.
+  # 처음이거나 못 찾으면 프레임 전체 → 한 변이 짧은 변의 search_window_fraction 배인 겹치는 창을 가운데부터 넣어 봅니다.
+  # MediaPipe 는 얼굴이 화면에서 작으면(Celeb-DF 는 폭 10% 안팎) 전체 프레임에서 놓치기 때문입니다.
+  search_window_scale: 3.0
+  search_window_fraction: 0.5
+  # 한 프레임에서 찾을 최대 얼굴 수. 여러 명이면 앞 프레임과 가장 많이 겹치는 얼굴을 고릅니다.
+  max_faces: 2
+  # 동시에 돌릴 프로세스 수
+  workers: 4
+  # Celeb-DF 논문 방식 분할에서 테스트로 뽑을 클래스별 영상 수와 난수 시드
+  celebdf_test_per_class: 100
+  split_seed: 0
+  output_dir: "D:/Graduation-project-data/processed/faces"
+
+paper_model:
+  # 원 논문 재현(models/paper_bclstm.py, scripts/train_paper.py) 설정. 이대현·문종섭 2020, Celeb-DF
+  # 입력: preprocess.output_dir/<dataset> 의 얼굴 크롭. 분할은 index.csv 의 split 열(train 490/5,539, test 100/100)
+  dataset: "celebdf"
+  frames: 30
+  image_size: 240
+  # XceptionNet: Keras ImageNet 가중치를 옮긴 timm legacy_xception. 가중치 파일은 scripts/setup_xception.py 가 받습니다.
+  backbone: "legacy_xception"
+  backbone_weights: "D:/Graduation-project-data/checkpoints/xception/xception-43020ad28.pth"
+  # CBAM: 공간 어텐션 필터 7x7 은 논문 값. 채널 축소율 16 은 논문에 없어서 CBAM 원 논문 기본값을 씁니다.
+  cbam_reduction: 16
+  spatial_kernel: 7
+  # ConvLSTM 은닉 채널·필터 크기는 논문에 없어서 정한 값입니다. peephole 은 논문 식 (7)~(11) 의 W_c⊗c 항입니다.
+  lstm_hidden: 128
+  lstm_kernel: 3
+  peephole: true
+  # 학습률 1e-4, Adam(β1 0.9, β2 0.999), 배치 2(real 1 + fake 1)는 논문 값입니다.
+  lr: 1.0e-4
+  betas: [0.9, 0.999]
+  pairs_per_batch: 1
+  # 논문 Table 4 는 fake 영상을 한 번씩 모두 쓰면 끝납니다(1 에폭). 더 학습하려면 늘리세요.
+  epochs: 1
+  seed: 0
+  # GPU 메모리 절약: bf16 자동 혼합 정밀도(amp), XceptionNet 구간별 gradient checkpointing
+  amp: true
+  grad_checkpointing: true
+  # 데이터를 읽는 자식 프로세스 수와 학습 로그 간격(스텝)
+  num_workers: 4
+  log_every: 50
+  checkpoint_dir: "D:/Graduation-project-data/checkpoints/paper_bclstm"
+  results_dir: "D:/Graduation-project-data/results/paper_bclstm"

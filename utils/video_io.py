@@ -142,3 +142,36 @@ def write_frames(path, frames, fps, crf=23, preset="medium"):
     stderr = process.stderr.read().decode("utf-8", "replace")
     if process.wait() != 0:
         raise RuntimeError(f"ffmpeg 인코딩 실패: {path}\n{stderr.strip()}")
+
+
+# 지정한 프레임 번호들만 골라 RGB 배열 [N, H, W, 3] (uint8) 로 읽습니다.
+# 영상 전체를 메모리에 올리지 않고, 앞에서부터 풀면서 필요한 번호의 프레임만 남깁니다.
+#   예) read_selected_frames("a.mp4", [0, 100, 200]) → 0, 100, 200번 프레임 3장
+# 반환값: (프레임 배열, fps, 실제로 읽은 프레임 번호 배열)
+#   번호는 작은 순서로 정렬되고 중복은 하나로 합칩니다. 영상이 짧아서 없는 번호는 빠집니다.
+def read_selected_frames(path, indices):
+    wanted = sorted({int(index) for index in indices})
+    if not wanted:
+        raise ValueError("읽을 프레임 번호가 없습니다.")
+    # 집합(set)은 "이 번호가 들어 있나?" 확인이 리스트보다 훨씬 빠릅니다.
+    wanted_set = set(wanted)
+    frames = []
+    found = []
+
+    with av.open(str(path)) as container:
+        stream = container.streams.video[0]
+        stream.thread_type = "AUTO"
+        fps = float(stream.average_rate)
+
+        for index, frame in enumerate(container.decode(stream)):
+            # 가장 큰 번호를 지나면 더 풀 필요가 없습니다.
+            if index > wanted[-1]:
+                break
+            if index in wanted_set:
+                frames.append(frame.to_ndarray(format="rgb24"))
+                found.append(index)
+
+    if not frames:
+        raise ValueError(f"프레임을 읽지 못했습니다: {path}")
+
+    return np.stack(frames), fps, np.array(found, dtype=np.int64)

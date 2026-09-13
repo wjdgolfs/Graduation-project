@@ -139,6 +139,12 @@ WildDeepfake 는 **얼굴 크롭 시퀀스로만** 배포됩니다 (`deepfake_in
 | 남는 공간 | **~74GB** |
 
 남는 74GB 안에 전환 합성본과 전처리 캐시가 전부 들어가야 합니다.
+
+**실측 (2026-09-13)**
+- Celeb-DF 얼굴 전처리 결과(.npz: 30프레임 크롭 + 랜드마크 + 배경 통계)는 영상 6,529개에 20.5GiB, 영상당 약 3.3MB 입니다.
+- FF++ 5,000개(원본 1,000 + 조작 4,000)도 같은 방식이면 약 16GB 가 더 들 것으로 예상합니다.
+- 원 논문 재현 체크포인트는 에폭당 약 500MB(모델 + Adam 상태)입니다.
+- D: 여유 공간은 189GiB 입니다(Celeb-DF 전처리와 FF++ 일부 4.3GB 를 받은 뒤).
 전환 합성은 Cut/Fade/Dissolve × 길이 조합이라 원본의 여러 배로 불어납니다.
 
 - 프레임을 JPG/PNG 로 전부 펼치지 마세요. 필요한 클립만 그때그때 디코딩합니다.
@@ -155,7 +161,7 @@ pip 로 안 받아지는 것들입니다. `D:/Graduation-project-data/checkpoint
 
 | 대상 | 받는 곳 | 크기 | 용도 |
 | --- | --- | --- | --- |
-| Xception (ImageNet) | timm `legacy_xception.tf_in1k` — 코드에서 자동 | ~88MB | 원 논문 백본 |
+| Xception (ImageNet) | `python scripts/setup_xception.py` → `checkpoints/xception/xception-43020ad28.pth` (**받음 2026-09-13**, sha256 `43020ad2…21aa90`) | ~88MB | 원 논문 백본. timm `legacy_xception` 의 기본 가중치(Keras ImageNet 가중치 변환본). timm 이 알아서 받으면 사용자 캐시 폴더로 가서 따로 받습니다 |
 | **FTCN** | <https://github.com/yinglinzheng/FTCN/releases/download/weights/ftcn_tt.pth> | 59.2MB | **0단계 파일럿의 탐지기** + 6단계 일반성 검증. 바로 쓸 수 있는 공개 사전학습 시간 기반 탐지기는 이것뿐입니다. 공식 코드는 PyTorch 1.4 / Python 3.7 기준(pillow 6.1, scipy 1.5.3, pickle5 고정)이라 현재 환경으로 옮겨야 합니다 |
 | FTCN 얼굴 검출 | <https://github.com/yinglinzheng/face_weights/releases/download/v1/mobilenet0.25_Final.pth> | 1.79MB | RetinaFace mobilenet0.25. FTCN 추론 전처리 |
 | FTCN 얼굴 랜드마크 | <https://github.com/yinglinzheng/face_weights/releases/download/v1/mobilenet_224_model_best_gdconv_external.pth> | 15.24MB | FTCN 추론 전처리. 코드가 처음 실행될 때 자동으로 받습니다. FTCN 은 이 검출 → 랜드마크 → 정렬 크롭으로 학습됐으므로 파일럿에서도 같은 전처리를 써야 점수가 의미를 가집니다 |
@@ -163,7 +169,7 @@ pip 로 안 받아지는 것들입니다. `D:/Graduation-project-data/checkpoint
 | BiSeNet 얼굴 파싱 (선택) | HF `vivym/face-parsing-bisenet` → `79999_iter.pth` | 53MB | MediaPipe 대신 픽셀 단위 부위 분할 |
 | DeepfakeBench (선택) | <https://github.com/SCLBD/DeepfakeBench> | — | 프레임 단위 탐지기 13종 가중치 + 통일된 평가 코드. **비디오 탐지기 가중치는 없음** (아래 참고) |
 
-- CBAM 과 Bidirectional ConvLSTM 은 받을 게 없습니다. 직접 구현하세요 (각각 50줄 안쪽).
+- CBAM 과 Bidirectional ConvLSTM 은 받을 게 없습니다. [`models/paper_bclstm.py`](../models/paper_bclstm.py) 에 직접 구현했습니다.
 - **정정 (2026-09-12)**: 이전에 "AltFreezing / TALL 은 DeepfakeBench 에 가중치가 있다"고 적었는데 틀렸습니다.
   DeepfakeBench 릴리스(v1.0.0~v1.0.3)의 탐지기 가중치는 Xception·EfficientNet-B4·F3Net·SPSL 같은 프레임 단위 탐지기뿐이고,
   FTCN·TALL·AltFreezing 은 학습용 3D R50 백본(`I3D_8x8_R50.pth`, 112.5MB)만 있습니다. 탐지기로 쓰려면 FF++ 로 직접 학습해야 합니다.
@@ -191,10 +197,23 @@ OpenCV 는 이미 설치된 기본판 `opencv-python` 을 그대로 씁니다. `
 | --- | --- | --- |
 | `scenedetect` | `opencv-python` | 유지 (기본판과 맞음) |
 | `batch-face` (+ `sixdrepnet`) | `opencv-python` | 뺌. 얼굴 검출은 FTCN 의 RetinaFace 로 충분 |
-| `mediapipe` | `opencv-contrib-python` | 뺌. 2단계에서 부위 분할 방식을 정할 때 결정 |
+| `mediapipe` | `opencv-contrib-python` | **따로 설치** (아래). 부위 분할에 씀 |
 
-2단계 부위 분할 후보: FTCN 전처리가 이미 뽑는 68점 랜드마크(추가 설치 없음, 이마 영역 없음),
-MediaPipe 468점(`pip install mediapipe --no-deps` 로 설치한 뒤 cv2 import 확인 필요), BiSeNet 얼굴 파싱.
+**부위 분할은 MediaPipe Face Landmarker(478점)로 결정했습니다 (2026-09-13).**
+mediapipe 본체는 `opencv-contrib-python` 을 요구해서 requirements.txt 에 넣지 않고, 의존성 자동 설치를 끄고 따로 설치합니다.
+이 상태에서 기존 `opencv-python` 5.0 과 함께 import 되는 것을 확인했습니다.
+`pip check` 에 나오는 opencv-contrib-python 경고는 예상된 것입니다.
+
+```bash
+.venv/Scripts/python.exe -m pip install --no-deps mediapipe==1.0.1
+```
+
+- mediapipe 1.0.1 에는 예전 `solutions.face_mesh` 가 없어서 Tasks API 의 `FaceLandmarker` 를 씁니다.
+- 모델 파일: `D:/Graduation-project-data/checkpoints/mediapipe/face_landmarker.task` (3,758,596 바이트, sha256 `64184e22…`)
+- FF++ 영상 035 앞 32프레임에서 모든 프레임의 얼굴을 찾았고, 프레임당 약 16.5ms(CPU)였습니다.
+- Celeb-DF 는 얼굴 폭이 화면의 10% 안팎이라 전체 프레임을 넣으면 놓치는 영상이 있습니다. 그래서 얼굴 주변을 잘라 넣는 두 단계 검출을 씁니다
+  ([`preprocessing/extract_faces.py`](../preprocessing/extract_faces.py) 머리말). Celeb-DF 6,529개 전처리(2026-09-13)에서 얼굴 찾은 프레임 비율은 99.99%,
+  실패는 1개(`Celeb-real/id27_0005`, 프레임이 1장뿐인 영상)였습니다.
 자세한 이유와 일부러 제외한 패키지는 [`requirements.txt`](../requirements.txt) 주석에 적었습니다.
 
 ---
@@ -212,15 +231,29 @@ FF++ 에는 얼굴이 화면 대부분을 차지하는 클로즈업이 적지 �
    비율이 낮은 영상을 어떻게 처리할지(제외 / α 조정 / fallback)를
    실험 전에 정해두세요. 나중에 발견하면 결과 해석이 흔들립니다.
 
-### 4-2. 8GB VRAM 안에 들어가는가
+### 4-2. 8GB VRAM 안에 들어가는가 — **확인 (2026-09-13)**
 
-Xception + Bidirectional ConvLSTM 에 16프레임 224×224 클립이면 8GB 는 빠듯합니다.
-파일럿 전에 배치 크기 1로 forward + backward 가 도는지부터 확인하세요.
-안 되면 AMP, 클립 길이 축소, 프레임 해상도 축소, gradient checkpointing 순으로 조정합니다.
-이 제약이 원 논문 재현 조건 자체를 바꿀 수 있으므로 먼저 재봐야 합니다.
+원 논문 조건(배치 2 = real 1 + fake 1, 30프레임, 240×240)을 줄이지 않고 그대로 학습할 수 있습니다. bf16 AMP 기준 실측:
 
-### 4-3. 원 논문 특정
+| 설정 | 스텝당 | 1 에폭 (5,539스텝) | 예약 VRAM |
+| --- | --- | --- | --- |
+| gradient checkpointing 켬 (기본) | 1.1초 | 약 102분 | 3.3GiB |
+| gradient checkpointing 끔 | 0.83초 | 약 77분 | 6.25GiB |
 
-"XceptionNet + CBAM + Bidirectional ConvLSTM" 재현을 하려면
-클립 길이, 프레임 샘플링 간격, 입력 해상도, 학습률 같은 값이 필요합니다.
-논문 서지 정보를 확정해서 이 문서에 적어두세요. 재현 수치의 기준이 됩니다.
+- **`torch.backends.cudnn.benchmark` 는 끄세요.** 켰을 때 첫 스텝이 25~130초로 늘어졌고, 이어서 그래픽 드라이버 시간 초과 블루스크린
+  (`VIDEO_TDR_FAILURE 0x116`)으로 PC 가 재부팅됐습니다. 끈 뒤에는 첫 스텝이 3초 안쪽입니다.
+- 블루스크린 기록에 "자원 부족"도 함께 남아서, VRAM 여유가 큰 checkpointing 켬을 기본으로 둡니다.
+- GPU 학습 중에는 CPU 전처리(프로세스 여러 개)를 같이 돌리지 마세요. 블루스크린이 났을 때 둘이 함께 돌고 있었습니다.
+
+### 4-3. 원 논문 특정 — **확정**
+
+이대현·문종섭, "Bidirectional Convolutional LSTM을 이용한 Deepfake 탐지 방법", 정보보호학회논문지 30(6), 2020.12, pp.1053–1065.
+DOI 10.13089/JKIISC.2020.30.6.1053
+
+| 항목 | 논문 값 | 이 코드에서 |
+| --- | --- | --- |
+| 데이터 | Celeb-DF: 학습 real 490 / fake 5,539, 테스트 100 / 100 | 어떤 영상인지 논문에 없어서 공식 테스트 목록에서 seed 0 으로 100 / 100 추출. real 1개(`id27_0005`, 1프레임 영상)가 빠져 학습 real 489 |
+| 입력 | 영상당 30프레임, 240×240 RGB 얼굴 | 0번 프레임부터 연속 30프레임 (연속인지 균등 간격인지 논문에 없음) |
+| 모델 | Xception → CBAM(공간 7×7) → Bi-ConvLSTM → FC 2 | CBAM 축소율 16, ConvLSTM 채널 128·필터 3×3 은 논문에 없어서 정한 값 |
+| 학습 | lr 1e-4, 배치 2(real 1 + fake 1), Adam(0.9, 0.999), 교차 엔트로피 | Table 4 의 반복이 fake 를 한 번씩 다 쓰면 끝나므로 1 에폭 |
+| 결과 | 정확도 93.5%, 정밀도 98.9%, 재현율 88.06%, F1 93.1% | 재현 목표는 정확도. 표 5 의 AUC 98.9 는 정밀도와 같은 값이라 오기로 의심 |
