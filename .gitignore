@@ -31,3 +31,8 @@ logs/
 
 # Temporary files
 *.tmp
+# External code (no license, not redistributed)
+third_party/
+
+# FaceForensics++ download script issued per user (do not publish)
+scripts/download_faceforensics.py

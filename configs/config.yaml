@@ -33,3 +33,28 @@ scene_detection:
   # 점진적 전환으로 판단하는 데 필요한 최소 연속 프레임 수이며, 초 단위가 아닙니다.
   # create_scene_signal.py는 높은 기준 미만인 후보만 모으므로 탐지 코드와 판정이 다를 수 있습니다.
   min_gradual_frames: 5
+
+pilot:
+  # 0단계 파일럿: real 영상에 장면 전환을 넣었을 때 시간 기반 탐지기(FTCN) 점수가 오르는지 봅니다.
+  # FF++ 공식 분할 중 어디서 고를지. FTCN 이 train 분할로 학습됐으므로 본 적 없는 test 를 씁니다.
+  split: "test"
+  # 파일럿에 쓸 real 영상 수. split 분할 영상 중 받아진 것을 이름순으로 앞에서부터 고릅니다.
+  num_videos: 10
+  # 영상마다 앞에서부터 잘라 쓸 프레임 수. FTCN 이 32프레임씩 보므로 전환 앞뒤로 여유를 둡니다.
+  segment_frames: 256
+  # 전환 구간의 중심 프레임 번호. 가장 긴 64프레임 디졸브도 앞뒤로 96프레임씩 여유가 남습니다.
+  transition_center: 128
+  # 전환 종류별 길이(프레임 수). hard_cut 은 길이가 없어 0 하나만 둡니다.
+  transitions:
+    hard_cut: [0]
+    fade: [8, 16, 32]
+    dissolve: [8, 16, 32, 64]
+  # 대조군과 합성본을 같은 조건으로 다시 압축합니다. CRF 23 은 FF++ c23 과 같은 값입니다.
+  crf: 23
+  preset: "medium"
+
+ftcn:
+  # FTCN 공식 코드 위치(프로젝트 폴더 기준). 라이선스가 없어 git 추적에서 제외했습니다.
+  repo_dir: "third_party/FTCN"
+  # FTCN 과 얼굴 검출·랜드마크 가중치 3개가 있는 폴더입니다.
+  weights_dir: "D:/Graduation-project-data/checkpoints/FTCN"
