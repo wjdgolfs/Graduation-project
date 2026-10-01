@@ -9,7 +9,7 @@ paths:
   processed: "D:/Graduation-project-data/processed"
   # extract_frames.py가 골라낸 JPG 이미지의 저장 위치입니다.
   frames: "D:/Graduation-project-data/frames"
-  # 관심 영역 데이터용 예약 경로. 현재 코드에서는 사용하지 않습니다.
+  # 2단계 부위 신호(preprocessing/region_signals.py)의 결과 폴더입니다. 데이터셋마다 하위 폴더를 만듭니다.
   regions: "D:/Graduation-project-data/regions"
   # 모델 가중치 폴더. FTCN·MediaPipe·XceptionNet 가중치와 학습한 모델(paper_model.checkpoint_dir)이 이 아래에 있습니다.
   checkpoints: "D:/Graduation-project-data/checkpoints"
@@ -124,3 +124,20 @@ paper_model:
   log_every: 50
   checkpoint_dir: "D:/Graduation-project-data/checkpoints/paper_bclstm"
   results_dir: "D:/Graduation-project-data/results/paper_bclstm"
+
+regions:
+  # 2단계 부위 신호(preprocessing/region_signals.py) 설정. 크기는 모두 얼굴 크롭(240x240) 픽셀 기준입니다.
+  # 랜드마크 시간 평활 창(프레임 수). 3 이면 앞뒤 1프레임씩 함께 평균합니다. 1 이하면 끕니다.
+  landmark_smoothing: 3
+  # 눈·입 볼록 껍질을 사방으로 넓히는 픽셀 수. 눈꺼풀과 입술 주변까지 담습니다.
+  eye_margin: 6
+  mouth_margin: 4
+  # 얼굴 윤곽선 양쪽으로 잡는 경계 띠 두께(픽셀). face-swap 이 가짜 얼굴을 섞는 경계가 들어오게 합니다.
+  boundary_band: 6
+  # t-1 과 t 에 공통인 부위 픽셀이 이보다 적으면 그 시점 값을 nan 으로 둡니다(눈을 꼭 감았을 때 등).
+  min_region_pixels: 20
+  # 배경 면적 비율(영상 평균)이 이보다 작으면 summary.csv 의 background_ok 를 0 으로 표시합니다. D_bg 를 믿기 어려운 영상입니다.
+  min_background_ratio: 0.3
+  # 동시에 돌릴 프로세스 수. CPU 를 많이 쓰니 GPU 학습과 동시에 돌리지 마세요.
+  workers: 6
+

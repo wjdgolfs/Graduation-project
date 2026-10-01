@@ -4,7 +4,8 @@
 # MediaPipe 가 찾은 얼굴 랜드마크(478점)로 다음을 계산하는 함수들입니다.
 #   - 크롭 상자   : 얼굴을 넉넉히 둘러싼 정사각형 상자, 그리고 프레임 사이 떨림을 줄이는 이동 평균
 #   - 얼굴 크롭   : 상자 부분을 잘라 정해진 크기(예: 240x240)로 맞춘 이미지와, 그 좌표계로 옮긴 랜드마크
-#   - 부위 마스크 : 눈·입·얼굴 윤곽의 볼록 껍질, 얼굴 경계 띠
+#   - 부위 마스크 : 눈·입·얼굴 윤곽의 볼록 껍질(넓히기 포함), 얼굴 경계 띠, 크롭 중 원래 프레임 안쪽 영역
+#   - 랜드마크    : 시간 방향 이동 평균(부위 마스크 떨림 줄이기)
 #   - 배경 마스크 : 얼굴 주변을 넓게 뺀 나머지 영역, 그리고 배경의 프레임 간 변화량
 #
 # 좌표 규칙
@@ -112,6 +113,30 @@ def smooth_boxes(boxes, window):
     return np.concatenate([smoothed_center - half, smoothed_center + half], axis=1), found
 
 
+# 랜드마크 [F, 점 수, 2] 를 시간 방향으로 부드럽게 만듭니다(가운데 정렬 이동 평균, 창 크기 window).
+#   얼굴을 못 찾은 프레임(nan)은 평균에서 빼고, 창 안에 쓸 프레임이 하나도 없으면 nan 으로 둡니다.
+#   그래서 앞뒤 프레임에 얼굴이 있으면 못 찾은 프레임도 그 평균으로 채워집니다.
+# 왜 필요한가 (Celeb-DF 30개 영상으로 잰 값, 크롭 240 픽셀 기준)
+#   프레임마다 따로 찾은 랜드마크는 떨림(점마다 2차 차분의 중앙값)이 1.87px 입니다. 부위 마스크 경계가 그만큼 흔들리면
+#   조작이 없어도 부위 변화량이 생깁니다. 3프레임 평균은 떨림을 0.60px 로 줄이고, 앞뒤를 같이 봐서 움직임에 뒤처지지 않습니다.
+#   대신 빠른 눈 깜빡임의 폭이 줄어듭니다(18.4 → 10.3px). window 가 1 이하면 그대로 돌려줍니다.
+def smooth_landmarks(points, window):
+    points = np.asarray(points, dtype=np.float64)
+    if window <= 1:
+        return points.copy()
+    frames = len(points)
+    half_window = window // 2
+    # 프레임마다 모든 점이 있는지 [F]. MediaPipe 는 한 프레임의 점을 전부 찾거나 전부 못 찾습니다.
+    valid = np.isfinite(points).all(axis=(1, 2))
+    smoothed = np.full_like(points, np.nan)
+    for t in range(frames):
+        lo, hi = max(0, t - half_window), min(frames, t + half_window + 1)
+        usable = valid[lo:hi]
+        if usable.any():
+            smoothed[t] = points[lo:hi][usable].mean(axis=0)
+    return smoothed
+
+
 # 실수 상자를 픽셀 단위 정사각형 (왼쪽 위 x, 왼쪽 위 y, 한 변) 으로 바꿉니다.
 # crop_frame 과 to_crop_coords 가 똑같이 반올림해야 크롭 이미지와 랜드마크 좌표가 정확히 맞습니다.
 def integer_square(box):
@@ -147,9 +172,21 @@ def crop_frame(frame, box, size):
     return cv2.resize(canvas, (size, size), interpolation=interpolation)
 
 
+# 크롭 이미지 [size, size] 에서 원래 프레임 안쪽에서 온 픽셀만 True 인 마스크를 만듭니다.
+# 얼굴이 화면 가장자리에 있으면 crop_frame 이 프레임 밖 부분을 검정으로 채우는데, 그 픽셀은 프레임 사이 비교에서 빼야 합니다.
+# 크롭 픽셀 u 의 중심은 원래 프레임에서 x1 + (u + 0.5) x (상자 한 변 / size) 입니다(crop_frame 과 같은 integer_square 사용).
+def inside_frame_mask(box, frame_width, frame_height, size):
+    x1, y1, side = integer_square(box)
+    xs = x1 + (np.arange(size) + 0.5) * side / size
+    ys = y1 + (np.arange(size) + 0.5) * side / size
+    # [size, 1] 과 [1, size] 를 비교해 합치면 브로드캐스팅으로 [size, size] 가 됩니다.
+    return (ys[:, None] >= 0) & (ys[:, None] < frame_height) & (xs[None, :] >= 0) & (xs[None, :] < frame_width)
+
+
 # 점 번호 indices 에 해당하는 점들의 볼록 껍질(점들을 고무줄로 감싼 모양)을 채운 마스크를 만듭니다.
+# margin 이 0 보다 크면 껍질을 사방으로 margin 픽셀만큼 넓힙니다(눈꺼풀·입술 주변까지 담을 때).
 # 반환값: [height, width] uint8 (안쪽 1, 바깥 0). 쓸 수 있는 점이 3개 미만이면 모두 0 입니다.
-def hull_mask(points, indices, height, width):
+def hull_mask(points, indices, height, width, margin=0):
     mask = np.zeros((height, width), dtype=np.uint8)
     selected = np.asarray(points, dtype=np.float64)[list(indices)]
     selected = selected[np.isfinite(selected).all(axis=1)]
@@ -157,6 +194,10 @@ def hull_mask(points, indices, height, width):
         return mask
     hull = cv2.convexHull(np.round(selected).astype(np.int32))
     cv2.fillConvexPoly(mask, hull, 1)
+    if margin > 0:
+        # 지름 2*margin+1 인 원 모양으로 팽창(dilate)하면, 모든 방향으로 margin 픽셀씩 넓어집니다.
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * margin + 1, 2 * margin + 1))
+        mask = cv2.dilate(mask, kernel)
     return mask
 
 
