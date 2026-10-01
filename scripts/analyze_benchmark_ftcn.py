@@ -12,7 +12,7 @@
 #   - 얼굴 추적이 전환에서 끊기면 FTCN 은 전환을 입력으로 보지 못합니다(하드컷에서 흔합니다).
 #     그런 클립은 "전환을 본 클립"과 나눠서 봅니다.
 #
-# 입력: benchmark.output_dir/manifest.csv 와 ftcn/*.npz (models/ftcn_runner.py 결과)
+# 입력: benchmark.output_dir/manifest.csv 와 ftcn/<source>/<clip_id>.npz (models/ftcn_runner.py 결과)
 # 출력: 화면 표 + paths.results/benchmark/ftcn_effect.csv (클립마다 대조군 대비 점수 변화)
 #
 # 실행 예 (프로젝트 폴더에서)
@@ -54,8 +54,9 @@ def load_config():
 
 
 # FTCN 결과 .npz 를 읽습니다. 없거나 오류가 적혀 있으면 None 입니다.
-def load_result(ftcn_dir, clip_id):
-    path = Path(ftcn_dir) / f"{clip_id}.npz"
+# clip_id 는 기법마다 겹치므로(Deepfakes/000_003 과 Face2Face/000_003) source 하위 폴더에서 찾습니다.
+def load_result(ftcn_dir, row):
+    path = Path(ftcn_dir) / row["source"] / f"{row['clip_id']}.npz"
     if not path.exists():
         return None
     with np.load(path, allow_pickle=True) as data:
@@ -112,11 +113,11 @@ def main():
         control_row = controls.get(key)
         if control_row is None:
             continue
-        control = load_result(ftcn_dir, control_row["clip_id"])
+        control = load_result(ftcn_dir, control_row)
         if control is None:
             continue
         for row in group:
-            result = load_result(ftcn_dir, row["clip_id"])
+            result = load_result(ftcn_dir, row)
             if result is None:
                 continue
             frame_count = int(row["frames"])

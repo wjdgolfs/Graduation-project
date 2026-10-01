@@ -131,19 +131,24 @@ def collect_jobs(args):
     jobs = []
 
     # manifest 가 있으면 그 목록의 영상을 clip_id 이름으로 처리합니다.
+    # clip_id 는 manifest 전체에서 유일하지 않습니다. FF++ 는 같은 번호의 영상을 기법마다 하나씩 갖기 때문에
+    # Deepfakes/000_003 과 Face2Face/000_003 의 clip_id 가 같습니다. 그래서 source 열이 있으면
+    # "source/clip_id" 를 이름으로 써서 결과 파일이 서로 덮어쓰지 않게 합니다(signals 폴더와 같은 구조).
     if args.manifest:
         with open(args.manifest, newline="", encoding="utf-8") as file:
             for row in csv.DictReader(file):
-                jobs.append((row["clip_id"], Path(row["path"]).resolve()))
+                name = f"{row['source']}/{row['clip_id']}" if row.get("source") else row["clip_id"]
+                jobs.append((name, Path(row["path"]).resolve()))
 
     # 직접 준 영상 경로는 파일 이름(확장자 제외)으로 처리합니다.
     for video in args.videos:
         path = Path(video).resolve()
         jobs.append((path.stem, path))
 
+    # --only 는 "source/clip_id" 전체와 clip_id 만 준 경우 둘 다 받습니다.
     if args.only:
         wanted = set(args.only)
-        jobs = [job for job in jobs if job[0] in wanted]
+        jobs = [job for job in jobs if job[0] in wanted or job[0].split("/")[-1] in wanted]
 
     return jobs
 
@@ -526,7 +531,10 @@ def main():
         elapsed = time.time() - started
         result["elapsed_sec"] = np.float32(elapsed)
         # **result: 딕셔너리의 각 키를 이름으로 붙여 배열들을 한 파일에 압축 저장합니다.
-        np.savez_compressed(out_dir / f"{name}.npz", **result)
+        # name 에 "source/" 가 붙어 있으면 하위 폴더를 만들어 그 안에 저장합니다.
+        out_path = out_dir / f"{name}.npz"
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        np.savez_compressed(out_path, **result)
 
         if str(result["error"]):
             print(f"[{index}/{len(pending)}] {name} 실패 ({elapsed:.1f}초)\n{result['error']}")
