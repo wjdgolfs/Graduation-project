@@ -24,15 +24,28 @@
 # 이어받기
 #   이미 받은 파일은 건너뛰고, 받는 중인 파일은 ".part" 이름으로 저장했다가 다 받으면 진짜 이름으로 바꿉니다.
 #   그래서 중간에 끊겨도 다시 실행하면 남은 것만 받고, 반쯤 받은 파일을 완성본으로 착각하지 않습니다.
+#   서버가 파일을 보내다 연결을 끊는 일이 잦습니다(2026-09-20 마스크 다운로드 중 IncompleteRead).
+#   그래서 받은 바이트 수가 서버가 알려 준 길이와 다르면 실패로 보고 다시 받습니다.
+#
+# 진행 표시
+#   막대는 남은 파일 중 끝난 개수이고, 오른쪽의 받은 양과 최근 10초 속도는 1초마다 바뀝니다.
+#   파일 하나가 끝나야 막대가 오르므로 큰 파일(마스크는 파일당 13MB 대)은 막대가 한동안 멈춰 보일 수 있습니다.
+#   이때는 "받은 양"이 늘고 있는지 보세요. 속도가 계속 0 이면 서버가 보내 주지 않는 것입니다.
+#   Ctrl+C 를 누르면 바로 멈추고, 받던 파일은 다음 실행 때 처음부터 다시 받습니다.
 # ============================================================================
 
 import argparse
 import json  # 서버의 파일 목록(filelist.json)을 읽습니다.
+import os  # Ctrl+C 로 멈출 때 프로그램을 바로 끝냅니다.
 import shutil  # 디스크 여유 공간을 확인합니다.
-import time  # 실패했을 때 잠시 기다립니다.
+import sys  # 출력이 진짜 화면인지(덮어쓰기가 되는지) 확인합니다.
+import threading  # 여러 스레드가 받은 양을 함께 셀 때 잠금(Lock)을 씁니다.
+import time  # 실패했을 때 잠시 기다리고, 받는 속도를 계산합니다.
 import urllib.error
 import urllib.request  # 인터넷에서 파일을 받습니다.
-from concurrent.futures import ThreadPoolExecutor  # 스레드 여러 개로 일을 나눠 맡깁니다.
+from collections import deque  # 최근 10초 동안의 받은 양 기록을 담습니다(앞에서 빼기가 빠른 목록).
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait  # 스레드 여러 개로 일을 나눠 맡깁니다.
+from http.client import HTTPException, IncompleteRead  # 서버가 파일을 보내다 연결을 끊을 때 나는 오류입니다.
 from pathlib import Path
 
 import yaml
@@ -51,6 +64,9 @@ TOS_URL = "https://kaldir.vc.in.tum.de/faceforensics/webpage/FaceForensics_TOS.p
 
 # 서버가 응답을 끊기 시작하는 지점이 8개였으므로 그 절반을 상한으로 둡니다.
 MAX_WORKERS = 4
+
+# 한 번에 읽는 크기. 이만큼 받을 때마다 받은 양이 진행 표시에 반영됩니다.
+CHUNK_SIZE = 64 * 1024
 
 # 데이터 종류별 서버 경로. 공식 스크립트의 DATASETS와 같습니다.
 DATASET_PATHS = {
@@ -105,29 +121,29 @@ JOBS = [
         "name": "masks_Deepfakes",
         "dataset": "Deepfakes",
         "type": "masks",
-        "size_gb": 1.5,
-        "reason": "조작 픽셀 위치. 부위별 기여도 분석의 정답지입니다.",
+        "size_gb": 0.05,
+        "reason": "조작 픽셀 위치. 부위별 기여도 분석의 정답지입니다. 실측: 파일당 약 0.04MB (2026-09-20).",
     },
     {
         "name": "masks_Face2Face",
         "dataset": "Face2Face",
         "type": "masks",
-        "size_gb": 1.5,
-        "reason": "조작 픽셀 위치.",
+        "size_gb": 13.6,
+        "reason": "조작 픽셀 위치. 실측: 파일당 약 13.6MB 로 Deepfakes 마스크보다 300배 큽니다 (2026-09-20).",
     },
     {
         "name": "masks_FaceSwap",
         "dataset": "FaceSwap",
         "type": "masks",
-        "size_gb": 1.5,
-        "reason": "조작 픽셀 위치.",
+        "size_gb": 13.5,
+        "reason": "조작 픽셀 위치. 크기 미확인이라 Face2Face 기준으로 잡았습니다.",
     },
     {
         "name": "masks_NeuralTextures",
         "dataset": "NeuralTextures",
         "type": "masks",
-        "size_gb": 1.5,
-        "reason": "조작 픽셀 위치.",
+        "size_gb": 13.5,
+        "reason": "조작 픽셀 위치. 크기 미확인이라 Face2Face 기준으로 잡았습니다.",
     },
 ]
 
@@ -193,10 +209,35 @@ def resolve_urls(job, output_root, compression):
     return url, out_dir
 
 
+# 여러 스레드가 받은 바이트 수를 함께 세는 계수기입니다.
+# total += n 은 "읽기 → 더하기 → 쓰기" 세 단계라, 스레드 둘이 동시에 하면 한쪽이 더한 값이 사라질 수 있습니다.
+# 그래서 잠금(Lock)을 건 동안에만 더합니다. 잠금은 한 번에 한 스레드만 들어갈 수 있는 문입니다.
+class ByteCounter:
+    def __init__(self):
+        self.total = 0
+        self._lock = threading.Lock()
+
+    def add(self, amount):
+        with self._lock:
+            self.total += amount
+
+
+# 바이트 수를 읽기 쉬운 단위로 바꿉니다. 예) 87040 → "85.0KB", 1288490188 → "1.20GB"
+def human_size(num_bytes):
+    if num_bytes < 1024:
+        return f"{num_bytes:.0f}B"
+    for unit in ("KB", "MB", "GB"):
+        num_bytes /= 1024
+        if num_bytes < 1024:
+            break
+    return f"{num_bytes:.2f}GB" if unit == "GB" else f"{num_bytes:.1f}{unit}"
+
+
 # 파일 하나를 받습니다. 이미 있으면 건너뛰고, 실패하면 잠시 쉬었다 다시 시도합니다.
-# 받는 도중에는 .part 이름을 쓰다가 다 받은 뒤 이름을 바꿔, 중단된 파일이 완성본으로 오인되지 않게 합니다.
+# 64KB 씩 받아 바로 ".part" 파일에 쓰고, 다 받은 뒤 진짜 이름으로 바꿔 중단된 파일이 완성본으로 오인되지 않게 합니다.
+# counter 가 있으면 받은 바이트 수를 거기에 더합니다(진행 표시의 받은 양과 속도).
 # 반환값: "ok"(받음), "skip"(이미 있음), "fail"(여러 번 시도해도 실패)
-def download_one(url, out_path, retries=3):
+def download_one(url, out_path, counter=None, retries=3):
     if out_path.exists():
         return "skip"
 
@@ -205,14 +246,27 @@ def download_one(url, out_path, retries=3):
 
     for attempt in range(retries):
         try:
+            received = 0
             with urllib.request.urlopen(url, timeout=120) as response:
-                data = response.read()
-            part_path.write_bytes(data)
+                # Content-Length: 서버가 "이만큼 보내겠다"고 미리 알려 주는 바이트 수입니다.
+                expected = response.headers.get("Content-Length")
+                # "wb": 새로 씁니다. 앞선 시도에서 받다 만 내용이 있어도 지우고 처음부터 씁니다.
+                with open(part_path, "wb") as file:
+                    # := 는 읽은 값을 chunk 에 넣으면서 바로 조건으로 씁니다. 더 받을 게 없으면 빈 값이라 멈춥니다.
+                    while chunk := response.read(CHUNK_SIZE):
+                        file.write(chunk)
+                        received += len(chunk)
+                        if counter is not None:
+                            counter.add(len(chunk))
+            # 연결이 중간에 끊기면 파일이 잘린 채로 끝납니다. 길이가 다르면 받은 것으로 치지 않고 다시 시도합니다.
+            # (IncompleteRead 의 첫 인자는 받은 내용인데, 이미 파일에 썼으므로 비워 둡니다.)
+            if expected is not None and received != int(expected):
+                raise IncompleteRead(b"", int(expected) - received)
             # replace: 이름 바꾸기. 같은 이름이 있어도 덮어씁니다.
             part_path.replace(out_path)
             return "ok"
-        except (urllib.error.URLError, OSError, TimeoutError):
-            # 서버가 연결을 끊는 경우가 있어 뒤로 갈수록 더 오래 기다립니다. (5초, 10초)
+        except (urllib.error.URLError, HTTPException, OSError, TimeoutError):
+            # 서버가 연결을 끊거나(IncompleteRead) 시간이 초과되는 일이 잦습니다. 뒤로 갈수록 더 오래 기다립니다. (5초, 10초)
             if attempt < retries - 1:
                 time.sleep(5 * (attempt + 1))
 
@@ -223,28 +277,70 @@ def download_one(url, out_path, retries=3):
 
 
 # 파일 목록을 여러 연결로 나눠 받습니다. 반환값은 (개수 요약, 실패한 파일 목록)입니다.
+# 진행 표시: 막대는 남은 파일 중 끝난 개수, 오른쪽은 받은 양과 최근 10초 속도(1초마다 갱신)입니다.
 def download_parallel(filelist, base_url, out_dir, workers):
     out_dir.mkdir(parents=True, exist_ok=True)
 
     counts = {"ok": 0, "skip": 0, "fail": 0}
     failed = []
 
+    # 이미 받은 파일은 미리 빼서, 진행 표시가 남은 파일만 세게 합니다.
+    pending = [filename for filename in filelist if not (out_dir / filename).exists()]
+    counts["skip"] = len(filelist) - len(pending)
+    print(f"  이미 있음 {counts['skip']}개, 받을 파일 {len(pending)}개")
+    if not pending:
+        return counts, failed
+
+    counter = ByteCounter()
+
     # 스레드 하나가 맡을 일: 파일 이름을 받아 다운로드하고 (이름, 결과) 를 돌려줍니다.
     def work(filename):
-        return filename, download_one(base_url + filename, out_dir / filename)
+        try:
+            return filename, download_one(base_url + filename, out_dir / filename, counter)
+        except Exception:
+            # 여기서 예외가 밖으로 나가면 다운로드 전체가 멈춥니다. 한 파일 실패로만 처리하고 계속 받습니다.
+            return filename, "fail"
 
+    # (시각, 그때까지 받은 바이트) 기록. 10초보다 오래된 것은 버리고, 가장 오래된 기록과 비교해 속도를 냅니다.
+    samples = deque()
+    # 진행 막대는 같은 줄을 덮어써서 갱신합니다. PyCharm 실행창처럼 덮어쓰기가 안 되는 곳에서는
+    # 1초마다 새 줄이 쌓여 화면이 도배되므로, 진짜 화면이 아닐 때는 막대를 끄고 30초에 한 줄만 찍습니다.
+    live = sys.stderr.isatty()
+    last_report = 0.0
     # ThreadPoolExecutor: 스레드 workers 개를 만들어 일을 나눠 줍니다.
-    # pool.map(work, filelist) 는 목록의 각 항목에 work 를 동시에 실행하고, 결과는 목록 순서대로 돌려줍니다.
-    # tqdm(...) 으로 감싸면 결과가 하나 나올 때마다 진행률 막대가 올라갑니다.
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        for filename, result in tqdm(
-            pool.map(work, filelist),
-            total=len(filelist),
-            unit="개"
-        ):
-            counts[result] += 1
-            if result == "fail":
-                failed.append(filename)
+    # submit 은 일 하나를 맡기고, 나중에 결과를 꺼낼 수 있는 표(future)를 돌려줍니다.
+    with ThreadPoolExecutor(max_workers=workers) as pool, tqdm(total=len(pending), unit="개", disable=not live) as bar:
+        running = {pool.submit(work, filename) for filename in pending}
+        try:
+            while running:
+                # 최대 1초 기다립니다. 그사이 끝난 일은 done 에, 아직인 일은 running 에 담깁니다.
+                # 끝난 순서대로 세므로, 앞 순서 파일이 늦어도 다른 파일이 끝나면 막대가 오릅니다.
+                done, running = wait(running, timeout=1, return_when=FIRST_COMPLETED)
+                for future in done:
+                    filename, result = future.result()
+                    counts[result] += 1
+                    if result == "fail":
+                        failed.append(filename)
+                    bar.update(1)
+
+                now = time.time()
+                samples.append((now, counter.total))
+                while now - samples[0][0] > 10:
+                    samples.popleft()
+                seconds = now - samples[0][0]
+                speed = (counter.total - samples[0][1]) / seconds if seconds > 0 else 0.0
+                if live:
+                    bar.set_postfix_str(f"받은 양 {human_size(counter.total)} | 속도 {human_size(speed)}/s")
+                elif now - last_report >= 30:
+                    last_report = now
+                    print(f"  {counts['ok'] + counts['fail']}/{len(pending)}개 | 받은 양 {human_size(counter.total)}"
+                          f" | 속도 {human_size(speed)}/s", flush=True)
+        except KeyboardInterrupt:
+            # Ctrl+C: 스레드가 받던 파일을 끝까지 받을 때까지 기다리지 않고 바로 끝냅니다(os._exit).
+            # 받다 만 .part 파일은 다음에 실행할 때 처음부터 다시 씁니다.
+            bar.close()
+            print("\n중단했습니다. 같은 명령으로 다시 실행하면 남은 파일부터 이어받습니다.")
+            os._exit(1)
 
     return counts, failed
 
