@@ -8,7 +8,7 @@
 
 지금까지 측정으로 확인한 것:
 
-- 2초짜리 디졸브에서 **진짜 영상 10개 전부** 탐지기 점수가 올랐습니다(오탐).
+- 2.5초 디졸브를 넣으면 FTCN 이 **진짜 영상 35개 중 32개를 가짜로 판정**합니다(전환이 없을 때는 16개).
 - 실무 표준 샷 검출기는 그 디졸브를 **기본 설정에서 0%** 잡습니다.
 - 배경 정규화는 전환이 만든 증가분의 **84~99%** 를 지우면서 real/fake 구분력은 유지했습니다.
 
@@ -21,7 +21,7 @@
 | 0 | 파일럿: 전환이 시간 기반 탐지기를 흔드는지 확인 | 완료 |
 | 1 | 원 논문 재현 (Xception + CBAM + Bi-ConvLSTM, Celeb-DF) | 완료 |
 | 2 | 부위·배경 마스크 파이프라인, D_region / D_bg 계산 | 완료 |
-| 3 | 전환 벤치마크 (Cut / Fade / Dissolve) 와 정규화 검증 | 완료 |
+| 3 | 전환 벤치마크 (Cut / Fade / Dissolve), 정규화와 FTCN 점수 검증 | 완료 |
 | 4 | 샷 분할 기준선 (PySceneDetect) | 완료 |
 | 5 | 배경 기준 정규화 모델 | 진행 중 |
 | 6 | FTCN 일반성 검증 | 예정 |
@@ -42,7 +42,7 @@
 preprocessing/   영상 → 얼굴 크롭·랜드마크·배경 통계, 부위 신호, 전환 벤치마크 생성
 models/          원 논문 재현 모델(Xception + CBAM + Bi-ConvLSTM), FTCN 실행 래퍼
 scripts/         학습·분석·다운로드·가중치 준비 스크립트
-tests/           단위 테스트 44개 (전환 계산, 부위 마스크, 모델 구조, 다운로드 재시도)
+tests/           단위 테스트 47개 (전환 계산, 부위 마스크, 모델 구조, 다운로드 재시도)
 configs/         모든 경로와 기준값이 모인 config.yaml
 results/         실험 결과 CSV (용량이 작은 것만 저장소에 포함)
 docs/            위 문서들
@@ -69,6 +69,13 @@ python preprocessing/build_transition_benchmark.py
 python preprocessing/benchmark_signals.py
 python scripts/analyze_benchmark.py
 
+# 3-1) 전환이 탐지 점수를 얼마나 흔드는지 (FTCN 채점 210클립, 약 2시간)
+python models/ftcn_runner.py \
+    --manifest D:/Graduation-project-data/processed/benchmark/manifest_pass1.csv \
+    --out-dir D:/Graduation-project-data/processed/benchmark/ftcn
+python scripts/analyze_benchmark_ftcn.py
+python scripts/compare_ftcn_signals.py
+
 # 4) 샷 분할 기준선
 python scripts/detect_shots_benchmark.py
 
@@ -87,6 +94,7 @@ python scripts/train_paper.py
 | Celeb-DF v2 영상 | 6,529개 |
 | 얼굴 전처리 결과 | 11,528개 · 40GB |
 | 전환 벤치마크 클립 | 1,260개 · 883MB |
+| 벤치마크 FTCN 채점 | 210클립 |
 
 ## 환경에서 확인한 제약
 
