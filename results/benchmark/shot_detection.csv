@@ -1,0 +1,1261 @@
+clip_id,source,label,kind,length,window_start,window_end,content27,content15,content8,fade,error,seconds
+000__control,original,0,control,0,0,0,,,,,,2.2
+000__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.3
+000__fade8,original,0,fade,8,124,132,127,126,124,128,,2.3
+000__fade16,original,0,fade,16,120,136,128,127,121,128,,2.1
+000__dissolve8,original,0,dissolve,8,124,132,,,130,,,2.1
+000__fade32,original,0,fade,32,112,144,127,127,124,129,,2.1
+000__dissolve16,original,0,dissolve,16,120,136,,,136,,,2.0
+000__dissolve32,original,0,dissolve,32,112,144,,,,,,2.0
+000__dissolve64,original,0,dissolve,64,96,160,,,,,,2.1
+003__control,original,0,control,0,0,0,,,,,,2.1
+003__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.0
+003__fade8,original,0,fade,8,124,132,128,127,124,127,,2.0
+003__fade16,original,0,fade,16,120,136,127,127,125,128,,2.0
+003__fade32,original,0,fade,32,112,144,127,126,125,127,,2.0
+003__dissolve8,original,0,dissolve,8,124,132,,124,124,,,2.1
+003__dissolve16,original,0,dissolve,16,120,136,,,120,,,2.2
+003__dissolve32,original,0,dissolve,32,112,144,,,,,,2.2
+003__dissolve64,original,0,dissolve,64,96,160,,,,,,2.2
+012__control,original,0,control,0,0,0,,34,34,,,1.9
+012__hard_cut,original,0,hard_cut,0,128,128,128 225,34 128 224,34 128 224,,,1.8
+012__fade8,original,0,fade,8,124,132,127 227,34 126 228,34 124 228,128,,1.9
+012__fade32,original,0,fade,32,112,144,127 227,34 126 228,34 123 228,128,,1.7
+012__fade16,original,0,fade,16,120,136,127 227,34 126 228,34 123 228,128,,1.8
+012__dissolve8,original,0,dissolve,8,124,132,225,34 224,34 124 228,,,1.9
+012__dissolve16,original,0,dissolve,16,120,136,225,34 224,34 120 228,,,1.9
+012__dissolve32,original,0,dissolve,32,112,144,225,34 224,34 224,,,1.9
+012__dissolve64,original,0,dissolve,64,96,160,225,34 224,34 224,,,1.9
+015__control,original,0,control,0,0,0,,,,,,1.7
+015__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+015__fade8,original,0,fade,8,124,132,128,127,124,128,,1.8
+015__fade16,original,0,fade,16,120,136,127,126,123,128,,1.8
+015__fade32,original,0,fade,32,112,144,127,126,123,128,,1.8
+015__dissolve8,original,0,dissolve,8,124,132,,,124,,,1.8
+015__dissolve16,original,0,dissolve,16,120,136,,,120,,,1.8
+015__dissolve32,original,0,dissolve,32,112,144,,,,,,1.9
+015__dissolve64,original,0,dissolve,64,96,160,,,,,,1.9
+024__control,original,0,control,0,0,0,225,224,224,,,1.7
+024__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+024__fade8,original,0,fade,8,124,132,127,127,124,128,,1.8
+024__fade16,original,0,fade,16,120,136,127,126,120,129,,1.8
+024__fade32,original,0,fade,32,112,144,126,126,120,129,,1.9
+024__dissolve8,original,0,dissolve,8,124,132,,132,124,,,1.9
+024__dissolve16,original,0,dissolve,16,120,136,,,120 136,,,1.7
+024__dissolve32,original,0,dissolve,32,112,144,,,,,,1.8
+024__dissolve64,original,0,dissolve,64,96,160,,,,,,1.8
+026__control,original,0,control,0,0,0,,,,,,1.8
+026__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+026__fade8,original,0,fade,8,124,132,127,127,124,128,,1.8
+026__fade16,original,0,fade,16,120,136,127,127,124,128,,1.7
+026__fade32,original,0,fade,32,112,144,127,126,125,128,,1.9
+026__dissolve8,original,0,dissolve,8,124,132,,,124,,,2.0
+026__dissolve16,original,0,dissolve,16,120,136,,,120,,,1.9
+026__dissolve32,original,0,dissolve,32,112,144,,,,,,1.9
+026__dissolve64,original,0,dissolve,64,96,160,,,,,,1.9
+029__control,original,0,control,0,0,0,,,,,,1.9
+029__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.9
+029__fade8,original,0,fade,8,124,132,128,127,124,127,,1.9
+029__fade16,original,0,fade,16,120,136,127,127,123,128,,1.8
+029__fade32,original,0,fade,32,112,144,127,126,125,128,,1.9
+029__dissolve8,original,0,dissolve,8,124,132,,,124,,,2.1
+029__dissolve16,original,0,dissolve,16,120,136,,,,,,1.9
+029__dissolve32,original,0,dissolve,32,112,144,,,,,,2.1
+029__dissolve64,original,0,dissolve,64,96,160,,,,,,2.1
+035__control,original,0,control,0,0,0,,,,,,2.0
+035__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.1
+035__fade8,original,0,fade,8,124,132,128,127,124,128,,2.1
+035__fade16,original,0,fade,16,120,136,127,127,125,128,,2.0
+035__fade32,original,0,fade,32,112,144,127,126,124 141,127,,2.1
+035__dissolve8,original,0,dissolve,8,124,132,,132,124,,,2.2
+035__dissolve16,original,0,dissolve,16,120,136,,,136,,,2.1
+035__dissolve32,original,0,dissolve,32,112,144,,,,,,2.1
+035__dissolve64,original,0,dissolve,64,96,160,,,,,,2.1
+036__control,original,0,control,0,0,0,,,,,,2.1
+036__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.1
+036__fade8,original,0,fade,8,124,132,127,126,124,128,,2.2
+036__fade16,original,0,fade,16,120,136,127,127,121,128,,2.1
+036__fade32,original,0,fade,32,112,144,127,126,116,128,,2.2
+036__dissolve16,original,0,dissolve,16,120,136,,,120 136,,,2.1
+036__dissolve8,original,0,dissolve,8,124,132,,124,124,,,2.2
+036__dissolve32,original,0,dissolve,32,112,144,,,112,,,2.1
+036__dissolve64,original,0,dissolve,64,96,160,,,,,,2.0
+044__control,original,0,control,0,0,0,,,250,,,4.3
+044__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,4.1
+044__fade8,original,0,fade,8,124,132,128,124,124,128,,4.1
+044__fade16,original,0,fade,16,120,136,128,127,120,128,,4.1
+044__fade32,original,0,fade,32,112,144,127,126,114 132,128,,4.1
+044__dissolve8,original,0,dissolve,8,124,132,,131,124,,,4.1
+044__dissolve16,original,0,dissolve,16,120,136,,,120,,,3.9
+044__dissolve32,original,0,dissolve,32,112,144,,,112 138,,,3.9
+044__dissolve64,original,0,dissolve,64,96,160,,,,,,3.8
+047__control,original,0,control,0,0,0,,,,,,2.4
+047__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.3
+047__fade8,original,0,fade,8,124,132,128,127,124,,,2.3
+047__fade16,original,0,fade,16,120,136,127,127,123,128,,2.2
+047__fade32,original,0,fade,32,112,144,127,126,125,128,,2.2
+047__dissolve8,original,0,dissolve,8,124,132,,,124,,,2.2
+047__dissolve16,original,0,dissolve,16,120,136,,,136 250,,,2.2
+047__dissolve32,original,0,dissolve,32,112,144,,,250,,,2.3
+047__dissolve64,original,0,dissolve,64,96,160,,,250,,,2.3
+048__control,original,0,control,0,0,0,,,59,,,1.9
+048__hard_cut,original,0,hard_cut,0,128,128,128,128,59 128,,,1.8
+048__fade8,original,0,fade,8,124,132,127,126,59 124,128,,1.7
+048__fade16,original,0,fade,16,120,136,127,127,59 123,129,,1.9
+048__fade32,original,0,fade,32,112,144,127,126,59 123,129,,1.8
+048__dissolve8,original,0,dissolve,8,124,132,,131,59 124,,,1.7
+048__dissolve16,original,0,dissolve,16,120,136,,,59 128,,,1.8
+048__dissolve32,original,0,dissolve,32,112,144,,,59 139,,,1.9
+048__dissolve64,original,0,dissolve,64,96,160,,,59 153,,,1.8
+073__control,original,0,control,0,0,0,,,,,,3.9
+073__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,3.8
+073__fade8,original,0,fade,8,124,132,127,127,124,127,,3.8
+073__fade16,original,0,fade,16,120,136,127,127,124,128,,3.8
+073__fade32,original,0,fade,32,112,144,127,126,123,128,,4.0
+073__dissolve8,original,0,dissolve,8,124,132,,,124,,,4.0
+073__dissolve16,original,0,dissolve,16,120,136,,,135,,,3.9
+073__dissolve32,original,0,dissolve,32,112,144,,,,,,3.9
+073__dissolve64,original,0,dissolve,64,96,160,,,,,,3.8
+078__control,original,0,control,0,0,0,,,,,,3.8
+078__hard_cut,original,0,hard_cut,0,128,128,128 170 235,128 170 235,128 170 235,,,3.9
+078__fade8,original,0,fade,8,124,132,127 170 235,126 170 235,124 170 235,128,,3.9
+078__fade16,original,0,fade,16,120,136,127 170 235,127 170 235,123 170 235,128,,4.1
+078__fade32,original,0,fade,32,112,144,127 170 235,127 170 235,123 170 235,128,,4.1
+078__dissolve8,original,0,dissolve,8,124,132,170 235,124 170 235,124 170 235 250,,,4.0
+078__dissolve16,original,0,dissolve,16,120,136,170 235,170 235,120 136 170 235 250,,,3.8
+078__dissolve32,original,0,dissolve,32,112,144,170 235,170 235,170 235 250,,,3.9
+078__dissolve64,original,0,dissolve,64,96,160,170 235,170 235,170 235 250,,,3.9
+102__control,original,0,control,0,0,0,,,,,,1.8
+102__fade8,original,0,fade,8,124,132,128,127,124,128,,1.8
+102__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+102__fade16,original,0,fade,16,120,136,128,127,123,128,,1.8
+102__fade32,original,0,fade,32,112,144,128,126,123,128,,1.8
+102__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.9
+102__dissolve16,original,0,dissolve,16,120,136,,,120,,,1.9
+102__dissolve32,original,0,dissolve,32,112,144,,,,,,1.7
+102__dissolve64,original,0,dissolve,64,96,160,,,,,,1.8
+114__control,original,0,control,0,0,0,,,250,,,1.9
+114__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+114__fade8,original,0,fade,8,124,132,127,126,124,128,,1.7
+114__fade16,original,0,fade,16,120,136,127,126,121,128,,1.8
+114__fade32,original,0,fade,32,112,144,128,124,120 138,127,,1.7
+114__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.8
+114__dissolve16,original,0,dissolve,16,120,136,,120,120 136,,,1.9
+114__dissolve32,original,0,dissolve,32,112,144,,,112 129 250,,,1.8
+114__dissolve64,original,0,dissolve,64,96,160,,,96,,,1.7
+128__control,original,0,control,0,0,0,,,250,,,1.9
+128__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+128__fade8,original,0,fade,8,124,132,127,126,124,128,,1.8
+128__fade16,original,0,fade,16,120,136,127,127,121,128,,1.8
+128__fade32,original,0,fade,32,112,144,127,126,116,128,,1.7
+128__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.7
+128__dissolve16,original,0,dissolve,16,120,136,,,120,,,2.0
+128__dissolve32,original,0,dissolve,32,112,144,,,112,,,1.9
+128__dissolve64,original,0,dissolve,64,96,160,,,97,,,1.9
+135__control,original,0,control,0,0,0,,,,,,4.0
+135__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,4.0
+135__fade8,original,0,fade,8,124,132,128,127,124,128,,4.0
+135__fade16,original,0,fade,16,120,136,127,127,123,128,,4.2
+135__fade32,original,0,fade,32,112,144,127,126,118 134,128,,4.3
+135__dissolve8,original,0,dissolve,8,124,132,,132,124,,,4.3
+135__dissolve16,original,0,dissolve,16,120,136,,,120 136,,,4.6
+135__dissolve32,original,0,dissolve,32,112,144,,,112,,,4.6
+135__dissolve64,original,0,dissolve,64,96,160,,,97,,,4.6
+138__control,original,0,control,0,0,0,,,,,,2.1
+138__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.0
+138__fade8,original,0,fade,8,124,132,128,127,124,128,,2.0
+138__fade16,original,0,fade,16,120,136,128,127,125,128,,2.1
+138__fade32,original,0,fade,32,112,144,128,127,123,129,,2.1
+138__dissolve8,original,0,dissolve,8,124,132,132,132,124,,,2.0
+138__dissolve16,original,0,dissolve,16,120,136,,136,135,,,2.1
+138__dissolve32,original,0,dissolve,32,112,144,,144,144,,,1.9
+138__dissolve64,original,0,dissolve,64,96,160,,,159,,,1.9
+141__control,original,0,control,0,0,0,,,20 250,,,2.2
+141__hard_cut,original,0,hard_cut,0,128,128,128,128,20 128,,,2.2
+141__fade8,original,0,fade,8,124,132,127,124,20 124,,,2.2
+141__fade16,original,0,fade,16,120,136,127,126,20 120 136,128,,2.3
+141__fade32,original,0,fade,32,112,144,128,124,20 118 144,128,,2.2
+141__dissolve8,original,0,dissolve,8,124,132,,,20 124,,,2.2
+141__dissolve16,original,0,dissolve,16,120,136,,,20,,,2.2
+141__dissolve32,original,0,dissolve,32,112,144,,,20,,,2.2
+141__dissolve64,original,0,dissolve,64,96,160,,,20,,,2.2
+142__control,original,0,control,0,0,0,,,,,,1.7
+142__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.6
+142__fade8,original,0,fade,8,124,132,128,127,126,128,,1.7
+142__fade16,original,0,fade,16,120,136,127,127,126,128,,1.7
+142__fade32,original,0,fade,32,112,144,127,126,126,127,,1.7
+142__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.7
+142__dissolve32,original,0,dissolve,32,112,144,,112,112,,,1.7
+142__dissolve16,original,0,dissolve,16,120,136,,120,120,,,1.8
+142__dissolve64,original,0,dissolve,64,96,160,,,96,,,1.7
+154__control,original,0,control,0,0,0,,,,,,4.3
+154__hard_cut,original,0,hard_cut,0,128,128,128,128,128 230,,,4.3
+154__fade8,original,0,fade,8,124,132,127,127,124 230,128,,4.3
+154__fade16,original,0,fade,16,120,136,127,127,123 230,128,,4.3
+154__fade32,original,0,fade,32,112,144,127,125,124 230,128,,4.3
+154__dissolve8,original,0,dissolve,8,124,132,,124,124 230,,,4.3
+154__dissolve16,original,0,dissolve,16,120,136,,,120 136 230,,,4.2
+154__dissolve32,original,0,dissolve,32,112,144,,,230,,,4.2
+154__dissolve64,original,0,dissolve,64,96,160,,,230,,,4.2
+158__control,original,0,control,0,0,0,,,,,,1.7
+158__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+158__fade8,original,0,fade,8,124,132,128,127,124,128,,1.7
+158__fade16,original,0,fade,16,120,136,128,127,124,128,,1.7
+158__fade32,original,0,fade,32,112,144,127,126,124 141,127,,1.8
+158__dissolve8,original,0,dissolve,8,124,132,,132,124,,,1.7
+158__dissolve16,original,0,dissolve,16,120,136,,,134,,,1.7
+158__dissolve64,original,0,dissolve,64,96,160,,,,,,1.7
+158__dissolve32,original,0,dissolve,32,112,144,,,144,,,1.8
+161__control,original,0,control,0,0,0,,,,,,1.7
+161__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.6
+161__fade8,original,0,fade,8,124,132,128,126,124,127,,1.7
+161__fade16,original,0,fade,16,120,136,127,126,123,128,,1.7
+161__fade32,original,0,fade,32,112,144,127,126,123,128,,1.7
+161__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.7
+161__dissolve16,original,0,dissolve,16,120,136,,120,120 136,,,1.6
+161__dissolve32,original,0,dissolve,32,112,144,,,112,,,1.6
+161__dissolve64,original,0,dissolve,64,96,160,,,96,,,1.7
+169__control,original,0,control,0,0,0,,,,,,1.6
+169__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.6
+169__fade8,original,0,fade,8,124,132,128,126,124,128,,1.7
+169__fade16,original,0,fade,16,120,136,128,127,120,128,,1.6
+169__fade32,original,0,fade,32,112,144,128,126,123,128,,1.6
+169__dissolve8,original,0,dissolve,8,124,132,,128,124,,,1.7
+169__dissolve16,original,0,dissolve,16,120,136,,,120 136,,,1.7
+169__dissolve32,original,0,dissolve,32,112,144,,,140,,,1.7
+169__dissolve64,original,0,dissolve,64,96,160,,,,,,1.8
+170__control,original,0,control,0,0,0,,,,,,8.5
+170__hard_cut,original,0,hard_cut,0,128,128,128,128 229,128 158 174 236,,,8.5
+170__fade8,original,0,fade,8,124,132,127,124 230,124 145 174 236,128,,8.5
+170__fade16,original,0,fade,16,120,136,127,125 230,120 158 174 236,128,,8.4
+170__fade32,original,0,fade,32,112,144,,125 143 229,121 158 174,129,,8.5
+170__dissolve8,original,0,dissolve,8,124,132,,132 229,124 145 174 236,,,8.5
+170__dissolve16,original,0,dissolve,16,120,136,,135 230,127 146 174,,,8.6
+170__dissolve32,original,0,dissolve,32,112,144,,144 229,136 181 210,,,8.6
+170__dissolve64,original,0,dissolve,64,96,160,,229,139 181 210,,,8.5
+176__control,original,0,control,0,0,0,,229,80 158 174,,,8.4
+176__hard_cut,original,0,hard_cut,0,128,128,128,128,80 128,,,8.5
+176__fade8,original,0,fade,8,124,132,127,124,80 132,128,,8.5
+176__fade16,original,0,fade,16,120,136,127,125,80 135,128,,9.0
+176__fade32,original,0,fade,32,112,144,127,125,80 140,128,,9.0
+176__dissolve8,original,0,dissolve,8,124,132,,124,80 132,,,8.9
+176__dissolve16,original,0,dissolve,16,120,136,,120,80 124,,,8.0
+176__dissolve32,original,0,dissolve,32,112,144,,,80 113,,,7.9
+176__dissolve64,original,0,dissolve,64,96,160,,,80 96,,,7.9
+186__control,original,0,control,0,0,0,,,,,,8.3
+186__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,8.3
+186__fade8,original,0,fade,8,124,132,128,125,124,128,,8.4
+186__fade16,original,0,fade,16,120,136,128,127,121,128,,8.4
+186__fade32,original,0,fade,32,112,144,127,127,116,128,,8.4
+186__dissolve8,original,0,dissolve,8,124,132,132,132,124,,,8.5
+186__dissolve16,original,0,dissolve,16,120,136,,136,120,,,8.1
+186__dissolve32,original,0,dissolve,32,112,144,,144,139,,,8.1
+186__dissolve64,original,0,dissolve,64,96,160,,,150,,,8.1
+190__control,original,0,control,0,0,0,,,,,,8.1
+190__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,8.2
+190__fade8,original,0,fade,8,124,132,128,127,124,127,,8.2
+190__fade16,original,0,fade,16,120,136,128,127,125,128,,8.3
+190__fade32,original,0,fade,32,112,144,127,127,125,127,,8.3
+190__dissolve8,original,0,dissolve,8,124,132,124,124,124,,,8.3
+190__dissolve16,original,0,dissolve,16,120,136,,120,120,,,7.9
+190__dissolve32,original,0,dissolve,32,112,144,,112,112,,,7.8
+190__dissolve64,original,0,dissolve,64,96,160,,,97,,,7.8
+214__control,original,0,control,0,0,0,,,,,,2.2
+214__hard_cut,original,0,hard_cut,0,128,128,128,128,128 169,,,2.2
+214__fade8,original,0,fade,8,124,132,127,124,124 169,128,,2.1
+214__fade16,original,0,fade,16,120,136,127,125,120 169,128,,2.2
+214__fade32,original,0,fade,32,112,144,126,123,115 134 169,129,,2.1
+214__dissolve8,original,0,dissolve,8,124,132,,128,124 169,,,2.1
+214__dissolve16,original,0,dissolve,16,120,136,,,127 169,,,2.2
+214__dissolve32,original,0,dissolve,32,112,144,,,142 169,,,2.2
+214__dissolve64,original,0,dissolve,64,96,160,,,169,,,2.2
+219__control,original,0,control,0,0,0,170 235,170 235,170 235 250,,,3.5
+219__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,3.6
+219__fade8,original,0,fade,8,124,132,127,124,124,128,,3.6
+219__fade16,original,0,fade,16,120,136,128,124,120,128,,3.6
+219__fade32,original,0,fade,32,112,144,128,125,117 136,128,,3.6
+219__dissolve8,original,0,dissolve,8,124,132,,,124,,,3.6
+219__dissolve16,original,0,dissolve,16,120,136,,,135,,,4.0
+219__dissolve32,original,0,dissolve,32,112,144,,,,,,4.1
+219__dissolve64,original,0,dissolve,64,96,160,,,,,,4.0
+220__control,original,0,control,0,0,0,,,,,,1.8
+220__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+220__fade8,original,0,fade,8,124,132,127,126,124,128,,1.8
+220__fade16,original,0,fade,16,120,136,127,127,123,128,,1.8
+220__fade32,original,0,fade,32,112,144,127,126,123,128,,1.8
+220__dissolve8,original,0,dissolve,8,124,132,,124,124,,,2.0
+220__dissolve16,original,0,dissolve,16,120,136,,,120 136 250,,,2.0
+220__dissolve32,original,0,dissolve,32,112,144,,,112 250,,,2.1
+220__dissolve64,original,0,dissolve,64,96,160,,,250,,,2.0
+227__control,original,0,control,0,0,0,,,230,,,5.0
+227__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,5.0
+227__fade8,original,0,fade,8,124,132,128,127,124,127,,5.0
+227__fade16,original,0,fade,16,120,136,128,127,122,128,,4.6
+227__fade32,original,0,fade,32,112,144,127,127,116,128,,4.5
+227__dissolve8,original,0,dissolve,8,124,132,,124,124,,,4.3
+227__dissolve16,original,0,dissolve,16,120,136,,,120 136,,,3.9
+227__dissolve32,original,0,dissolve,32,112,144,,,112,,,3.9
+227__dissolve64,original,0,dissolve,64,96,160,,,,,,4.0
+233__control,original,0,control,0,0,0,,,39,,,3.9
+233__hard_cut,original,0,hard_cut,0,128,128,128,128,39 128 188,,,4.0
+233__fade8,original,0,fade,8,124,132,128,126,39 132 188,128,,4.0
+233__fade16,original,0,fade,16,120,136,127,126,39 132 188,128,,4.2
+233__fade32,original,0,fade,32,112,144,127,127,39 131 188,128,,4.2
+233__dissolve8,original,0,dissolve,8,124,132,,,39 124 188,,,4.2
+233__dissolve16,original,0,dissolve,16,120,136,,,39 188,,,4.3
+233__dissolve32,original,0,dissolve,32,112,144,,,39 188,,,4.3
+233__dissolve64,original,0,dissolve,64,96,160,,,39 188,,,4.3
+249__control,original,0,control,0,0,0,,,169,,,2.5
+249__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.4
+249__fade8,original,0,fade,8,124,132,128,126,124,128,,2.4
+249__fade16,original,0,fade,16,120,136,128,127,123,128,,2.4
+249__fade32,original,0,fade,32,112,144,128,127,124,128,,2.4
+249__dissolve8,original,0,dissolve,8,124,132,,,124,,,2.4
+249__dissolve16,original,0,dissolve,16,120,136,,,133,,,2.4
+249__dissolve32,original,0,dissolve,32,112,144,,,,,,2.4
+249__dissolve64,original,0,dissolve,64,96,160,,,,,,2.4
+255__control,original,0,control,0,0,0,,,188,,,4.2
+255__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,4.2
+255__fade8,original,0,fade,8,124,132,128,127,124,128,,4.3
+255__fade16,original,0,fade,16,120,136,128,127,125,128,,4.2
+255__fade32,original,0,fade,32,112,144,127,127,125,128,,4.2
+255__dissolve8,original,0,dissolve,8,124,132,,132,124,,,4.1
+255__dissolve16,original,0,dissolve,16,120,136,,136,133,,,4.2
+255__dissolve32,original,0,dissolve,32,112,144,,,141,,,4.2
+255__dissolve64,original,0,dissolve,64,96,160,,,159 250,,,4.2
+257__control,original,0,control,0,0,0,,,,,,1.7
+257__hard_cut,original,0,hard_cut,0,128,128,128,128,128 176,,,1.7
+257__fade8,original,0,fade,8,124,132,128,127,124 176,128,,1.8
+257__fade16,original,0,fade,16,120,136,128,127,126 178,128,,1.8
+257__fade32,original,0,fade,32,112,144,127,127,126 176,128,,1.8
+257__dissolve8,original,0,dissolve,8,124,132,,132,124 176,,,1.8
+257__dissolve16,original,0,dissolve,16,120,136,,,135 176,,,1.8
+257__dissolve32,original,0,dissolve,32,112,144,,,176,,,1.7
+257__dissolve64,original,0,dissolve,64,96,160,,,176,,,1.7
+278__control,original,0,control,0,0,0,,,,,,1.7
+278__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.7
+278__fade8,original,0,fade,8,124,132,128,126,124,128,,1.7
+278__fade16,original,0,fade,16,120,136,128,127,125,128,,1.7
+278__fade32,original,0,fade,32,112,144,127,127,126,128,,1.7
+278__dissolve8,original,0,dissolve,8,124,132,,132,124,,,1.7
+278__dissolve16,original,0,dissolve,16,120,136,,,135,,,1.7
+278__dissolve32,original,0,dissolve,32,112,144,,,144,,,1.7
+278__dissolve64,original,0,dissolve,64,96,160,,,,,,1.8
+280__control,original,0,control,0,0,0,,,,,,2.4
+280__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.4
+280__fade8,original,0,fade,8,124,132,128,127,124,127,,2.4
+280__fade16,original,0,fade,16,120,136,128,127,126,128,,2.4
+280__fade32,original,0,fade,32,112,144,128,127,125 144,128,,2.4
+280__dissolve8,original,0,dissolve,8,124,132,,124,124,,,2.4
+280__dissolve16,original,0,dissolve,16,120,136,,,120 136,,,2.4
+280__dissolve32,original,0,dissolve,32,112,144,,,112 144,,,2.4
+280__dissolve64,original,0,dissolve,64,96,160,,,102,,,2.4
+288__control,original,0,control,0,0,0,,,,,,1.7
+288__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.7
+288__fade8,original,0,fade,8,124,132,127,126,124,128,,1.7
+288__fade16,original,0,fade,16,120,136,127,127,123,128,,1.7
+288__fade32,original,0,fade,32,112,144,126,125,125,128,,1.7
+288__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.7
+288__dissolve16,original,0,dissolve,16,120,136,,,120 135,,,1.7
+288__dissolve32,original,0,dissolve,32,112,144,,,112 250,,,1.7
+288__dissolve64,original,0,dissolve,64,96,160,,,250,,,1.7
+306__control,original,0,control,0,0,0,,,,,,1.7
+306__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.7
+306__fade8,original,0,fade,8,124,132,127,127,124,128,,1.7
+306__fade16,original,0,fade,16,120,136,127,127,123,129,,1.8
+306__fade32,original,0,fade,32,112,144,127,126,123,129,,1.8
+306__dissolve8,original,0,dissolve,8,124,132,,132,124,,,1.8
+306__dissolve16,original,0,dissolve,16,120,136,,136,135,,,1.8
+306__dissolve32,original,0,dissolve,32,112,144,,,143,,,1.8
+306__dissolve64,original,0,dissolve,64,96,160,,,160 250,,,1.7
+308__control,original,0,control,0,0,0,,,250,,,4.3
+308__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,4.2
+308__fade8,original,0,fade,8,124,132,127,126,124,128,,4.2
+308__fade16,original,0,fade,16,120,136,127,127,123,129,,4.0
+308__fade32,original,0,fade,32,112,144,127,126,120,128,,3.9
+308__dissolve8,original,0,dissolve,8,124,132,,124,124,,,3.9
+308__dissolve16,original,0,dissolve,16,120,136,,120,120 136,,,4.3
+308__dissolve32,original,0,dissolve,32,112,144,,112,112,,,4.4
+308__dissolve64,original,0,dissolve,64,96,160,,,96,,,4.4
+314__control,original,0,control,0,0,0,,,,,,4.8
+314__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,4.8
+314__fade8,original,0,fade,8,124,132,128,126,124,127,,4.8
+314__fade16,original,0,fade,16,120,136,128,124,123,128,,4.7
+314__fade32,original,0,fade,32,112,144,128,123,119,127,,4.6
+314__dissolve8,original,0,dissolve,8,124,132,,124,124,,,4.6
+314__dissolve16,original,0,dissolve,16,120,136,,,120,,,4.5
+314__dissolve32,original,0,dissolve,32,112,144,,,,,,4.6
+314__dissolve64,original,0,dissolve,64,96,160,,,,,,4.5
+319__control,original,0,control,0,0,0,,,,,,2.6
+319__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.6
+319__fade8,original,0,fade,8,124,132,128,124,124,128,,2.6
+319__fade16,original,0,fade,16,120,136,127,127,120,128,,2.6
+319__fade32,original,0,fade,32,112,144,127,126,125,129,,2.6
+319__dissolve8,original,0,dissolve,8,124,132,,129,124,,,2.5
+319__dissolve16,original,0,dissolve,16,120,136,,135,127,,,2.5
+319__dissolve32,original,0,dissolve,32,112,144,,,135,,,2.6
+319__dissolve64,original,0,dissolve,64,96,160,,,250,,,2.6
+321__control,original,0,control,0,0,0,,,250,,,1.8
+321__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+321__fade8,original,0,fade,8,124,132,127,126,124,128,,1.9
+321__fade16,original,0,fade,16,120,136,127,127,123,128,,1.9
+321__fade32,original,0,fade,32,112,144,127,127,123,128,,2.2
+321__dissolve8,original,0,dissolve,8,124,132,,124,124,,,2.3
+321__dissolve16,original,0,dissolve,16,120,136,,,120,,,2.4
+321__dissolve32,original,0,dissolve,32,112,144,,,,,,2.3
+321__dissolve64,original,0,dissolve,64,96,160,,,,,,2.3
+347__control,original,0,control,0,0,0,,,,,,3.2
+347__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,3.1
+347__fade8,original,0,fade,8,124,132,127,125,124,128,,3.0
+347__fade16,original,0,fade,16,120,136,126,124,120,128,,2.9
+347__fade32,original,0,fade,32,112,144,125,125,116,128,,3.0
+347__dissolve8,original,0,dissolve,8,124,132,,124,124,,,3.0
+347__dissolve16,original,0,dissolve,16,120,136,,120,120,,,3.4
+347__dissolve32,original,0,dissolve,32,112,144,,,112,,,3.5
+347__dissolve64,original,0,dissolve,64,96,160,,,,,,3.5
+352__control,original,0,control,0,0,0,,,250,,,2.7
+352__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.7
+352__fade8,original,0,fade,8,124,132,127,126,124,128,,2.7
+352__fade16,original,0,fade,16,120,136,127,126,121,128,,2.2
+352__fade32,original,0,fade,32,112,144,127,123,117 134,128,,2.1
+352__dissolve8,original,0,dissolve,8,124,132,,,124,,,2.1
+352__dissolve16,original,0,dissolve,16,120,136,,,120,,,2.4
+352__dissolve32,original,0,dissolve,32,112,144,,,117,,,2.3
+352__dissolve64,original,0,dissolve,64,96,160,,,,,,2.4
+358__control,original,0,control,0,0,0,,,,,,2.1
+358__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.1
+358__fade8,original,0,fade,8,124,132,127,127,124,127,,2.0
+358__fade16,original,0,fade,16,120,136,127,127,124,128,,2.1
+358__fade32,original,0,fade,32,112,144,127,126,123 142,128,,2.1
+358__dissolve8,original,0,dissolve,8,124,132,,132,124,,,2.0
+358__dissolve16,original,0,dissolve,16,120,136,,136,120,,,2.2
+358__dissolve32,original,0,dissolve,32,112,144,,,140,,,2.2
+358__dissolve64,original,0,dissolve,64,96,160,,,157,,,2.2
+367__control,original,0,control,0,0,0,,,,,,2.1
+367__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.0
+367__fade8,original,0,fade,8,124,132,128,127,124,128,,2.2
+367__fade16,original,0,fade,16,120,136,128,127,123,129,,2.3
+367__fade32,original,0,fade,32,112,144,127,127,126,128,,2.4
+367__dissolve8,original,0,dissolve,8,124,132,,129,124,,,2.3
+367__dissolve16,original,0,dissolve,16,120,136,,136,129,,,2.1
+367__dissolve32,original,0,dissolve,32,112,144,,,143,,,2.0
+367__dissolve64,original,0,dissolve,64,96,160,,,159 250,,,1.9
+371__control,original,0,control,0,0,0,,,250,,,1.7
+371__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+371__fade8,original,0,fade,8,124,132,127,127,124,127,,1.9
+371__fade16,original,0,fade,16,120,136,127,126,120,128,,2.9
+371__fade32,original,0,fade,32,112,144,126,125,120,127,,3.1
+371__dissolve8,original,0,dissolve,8,124,132,124,124,124,,,3.0
+371__dissolve16,original,0,dissolve,16,120,136,,120,120,,,2.6
+371__dissolve32,original,0,dissolve,32,112,144,,112,112,,,2.4
+371__dissolve64,original,0,dissolve,64,96,160,,,96,,,2.4
+376__control,original,0,control,0,0,0,,,,,,4.4
+376__hard_cut,original,0,hard_cut,0,128,128,128,128 173,128 173,,,4.3
+376__fade8,original,0,fade,8,124,132,127,126 173,124 173,127,,4.2
+376__fade16,original,0,fade,16,120,136,127,126 173,123 173,128,,3.7
+376__dissolve8,original,0,dissolve,8,124,132,,173,124 173 250,,,3.7
+376__fade32,original,0,fade,32,112,144,126,124 173,121 173,127,,3.7
+376__dissolve16,original,0,dissolve,16,120,136,,173,121 173 250,,,3.5
+376__dissolve32,original,0,dissolve,32,112,144,,173,173 250,,,3.3
+376__dissolve64,original,0,dissolve,64,96,160,,173,108 173 250,,,3.4
+379__control,original,0,control,0,0,0,,,250,,,1.7
+379__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.7
+379__fade8,original,0,fade,8,124,132,127,124,124,128,,1.7
+379__fade16,original,0,fade,16,120,136,127,126,120,129,,1.6
+379__fade32,original,0,fade,32,112,144,127,126,119,128,,1.6
+379__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.6
+379__dissolve16,original,0,dissolve,16,120,136,,120,120 136,,,1.6
+379__dissolve32,original,0,dissolve,32,112,144,,,112,,,1.6
+379__dissolve64,original,0,dissolve,64,96,160,,,97,,,1.5
+380__control,original,0,control,0,0,0,,,,,,1.5
+380__hard_cut,original,0,hard_cut,0,128,128,128,128,128 158,,,1.5
+380__fade8,original,0,fade,8,124,132,128,127,124 158,128,,1.5
+380__fade16,original,0,fade,16,120,136,127,127,126 158,128,,1.5
+380__fade32,original,0,fade,32,112,144,127,125,125 158,128,,1.5
+380__dissolve8,original,0,dissolve,8,124,132,,132,124 158 250,,,1.5
+380__dissolve16,original,0,dissolve,16,120,136,,,131 158 250,,,1.5
+380__dissolve32,original,0,dissolve,32,112,144,,,144,,,1.5
+380__dissolve64,original,0,dissolve,64,96,160,,,158 250,,,1.5
+381__control,original,0,control,0,0,0,,,176,,,1.6
+381__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.6
+381__fade8,original,0,fade,8,124,132,127,126,124,127,,1.6
+381__fade16,original,0,fade,16,120,136,127,126,120 136,128,,1.6
+381__fade32,original,0,fade,32,112,144,127,125,117,128,,1.6
+381__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.6
+381__dissolve16,original,0,dissolve,16,120,136,,,120,,,1.6
+381__dissolve32,original,0,dissolve,32,112,144,,,,,,1.6
+381__dissolve64,original,0,dissolve,64,96,160,,,,,,1.6
+384__control,original,0,control,0,0,0,,,,,,6.6
+384__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,6.6
+384__fade8,original,0,fade,8,124,132,128,126,124,128,,6.5
+384__dissolve8,original,0,dissolve,8,124,132,,124,124,,,6.7
+384__fade16,original,0,fade,16,120,136,128,126,120,128,,6.8
+384__fade32,original,0,fade,32,112,144,128,127,121,128,,6.7
+384__dissolve16,original,0,dissolve,16,120,136,,,120,,,7.1
+384__dissolve32,original,0,dissolve,32,112,144,,,112,,,7.2
+384__dissolve64,original,0,dissolve,64,96,160,,,,,,7.2
+386__control,original,0,control,0,0,0,,,,,,6.6
+386__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,6.7
+386__fade8,original,0,fade,8,124,132,128,124,124,128,,6.7
+386__fade16,original,0,fade,16,120,136,128,127,120,129,,8.8
+386__fade32,original,0,fade,32,112,144,127,127,126,130,,8.9
+386__dissolve8,original,0,dissolve,8,124,132,132,130,124,,,8.9
+386__dissolve16,original,0,dissolve,16,120,136,136,134,131,,,8.5
+386__dissolve64,original,0,dissolve,64,96,160,,159,151,,,8.4
+386__dissolve32,original,0,dissolve,32,112,144,,143,137,,,8.5
+388__control,original,0,control,0,0,0,,,74 158 250,,,1.7
+388__hard_cut,original,0,hard_cut,0,128,128,128,128,74 128,,,1.6
+388__fade8,original,0,fade,8,124,132,128,127,74 132,128,,1.7
+388__fade16,original,0,fade,16,120,136,127,126,74 135,128,,1.7
+388__fade32,original,0,fade,32,112,144,127,126,74 141,128,,1.7
+388__dissolve8,original,0,dissolve,8,124,132,,124,74 132 250,,,1.7
+388__dissolve16,original,0,dissolve,16,120,136,,,74 136 250,,,1.7
+388__dissolve32,original,0,dissolve,32,112,144,,,74 140 250,,,1.7
+388__dissolve64,original,0,dissolve,64,96,160,,,74,,,1.7
+389__control,original,0,control,0,0,0,,,,,,7.8
+389__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,7.9
+389__fade8,original,0,fade,8,124,132,128,127,124,128,,7.7
+389__fade16,original,0,fade,16,120,136,128,127,125,128,,7.5
+389__fade32,original,0,fade,32,112,144,127,127,125,128,,7.5
+389__dissolve8,original,0,dissolve,8,124,132,,131,124,,,7.5
+389__dissolve16,original,0,dissolve,16,120,136,,,124,,,8.3
+389__dissolve64,original,0,dissolve,64,96,160,,,,,,8.3
+389__dissolve32,original,0,dissolve,32,112,144,,,144,,,8.4
+399__control,original,0,control,0,0,0,,,,,,3.8
+399__fade8,original,0,fade,8,124,132,127,125,124,128,,3.7
+399__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,3.8
+399__fade16,original,0,fade,16,120,136,128,126,120 136,128,,4.5
+399__fade32,original,0,fade,32,112,144,128,126,123,129,,4.3
+399__dissolve8,original,0,dissolve,8,124,132,,,124,,,4.3
+399__dissolve16,original,0,dissolve,16,120,136,,,120 250,,,4.5
+399__dissolve32,original,0,dissolve,32,112,144,,,250,,,4.4
+399__dissolve64,original,0,dissolve,64,96,160,,,250,,,4.5
+404__control,original,0,control,0,0,0,,108 173,108 173 250,,,4.5
+404__hard_cut,original,0,hard_cut,0,128,128,128,108 128,108 128,,,4.5
+404__fade8,original,0,fade,8,124,132,128,108 126,108 124,128,,4.4
+404__fade16,original,0,fade,16,120,136,127,108 126,108 123,128,,4.7
+404__fade32,original,0,fade,32,112,144,127,108 126,108 123,128,,4.7
+404__dissolve8,original,0,dissolve,8,124,132,,108,108 124,,,4.7
+404__dissolve16,original,0,dissolve,16,120,136,,108,108,,,4.3
+404__dissolve32,original,0,dissolve,32,112,144,,108,108,,,4.2
+404__dissolve64,original,0,dissolve,64,96,160,,108,108,,,4.2
+418__control,original,0,control,0,0,0,,,,,,4.2
+418__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,4.2
+418__fade8,original,0,fade,8,124,132,128,126,124,128,,4.2
+418__fade32,original,0,fade,32,112,144,128,127,123,127,,4.1
+418__fade16,original,0,fade,16,120,136,128,127,122,128,,4.1
+418__dissolve8,original,0,dissolve,8,124,132,,132,124,,,4.1
+418__dissolve16,original,0,dissolve,16,120,136,,,120 136,,,4.0
+418__dissolve32,original,0,dissolve,32,112,144,,,,,,4.1
+418__dissolve64,original,0,dissolve,64,96,160,,,,,,4.1
+420__control,original,0,control,0,0,0,,,,,,1.7
+420__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.7
+420__fade8,original,0,fade,8,124,132,128,124,124,128,,1.8
+420__fade16,original,0,fade,16,120,136,128,127,120,129,,1.7
+420__fade32,original,0,fade,32,112,144,127,127,125,129,,1.8
+420__dissolve8,original,0,dissolve,8,124,132,,132,125,,,1.8
+420__dissolve16,original,0,dissolve,16,120,136,,,135,,,1.8
+420__dissolve32,original,0,dissolve,32,112,144,,,,,,1.7
+420__dissolve64,original,0,dissolve,64,96,160,,,,,,1.8
+421__control,original,0,control,0,0,0,,,250,,,1.7
+421__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.7
+421__fade8,original,0,fade,8,124,132,128,126,124,127,,1.7
+421__fade16,original,0,fade,16,120,136,127,127,123,128,,1.7
+421__fade32,original,0,fade,32,112,144,127,125,121,127,,1.7
+421__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.7
+421__dissolve16,original,0,dissolve,16,120,136,,120,120,,,1.7
+421__dissolve32,original,0,dissolve,32,112,144,,,112,,,1.7
+421__dissolve64,original,0,dissolve,64,96,160,,,,,,1.7
+422__hard_cut,original,0,hard_cut,0,128,128,128,30 128,118,,,8.3
+422__control,original,0,control,0,0,0,,30,118,,,8.4
+422__fade8,original,0,fade,8,124,132,127,30 124,118,127,,8.3
+422__fade16,original,0,fade,16,120,136,125,30 122,118 136,128,,8.0
+422__fade32,original,0,fade,32,112,144,124,30 122,,126,,8.1
+422__dissolve8,original,0,dissolve,8,124,132,124,30 124,118,,,8.1
+422__dissolve16,original,0,dissolve,16,120,136,,30 120,118,,,7.5
+422__dissolve32,original,0,dissolve,32,112,144,,30 112,,,,7.5
+422__dissolve64,original,0,dissolve,64,96,160,,30,117,,,7.5
+423__control,original,0,control,0,0,0,,,250,,,1.8
+423__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.8
+423__fade8,original,0,fade,8,124,132,127,126,124,128,,1.8
+423__fade16,original,0,fade,16,120,136,127,126,123,128,,1.8
+423__fade32,original,0,fade,32,112,144,127,126,122,127,,1.9
+423__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.8
+423__dissolve16,original,0,dissolve,16,120,136,,120,120,,,1.9
+423__dissolve32,original,0,dissolve,32,112,144,,,112 129,,,1.8
+423__dissolve64,original,0,dissolve,64,96,160,,,,,,1.8
+425__control,original,0,control,0,0,0,,,,,,2.2
+425__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.2
+425__fade8,original,0,fade,8,124,132,128,127,124,128,,2.2
+425__fade16,original,0,fade,16,120,136,128,127,123,128,,2.1
+425__fade32,original,0,fade,32,112,144,127,127,125,128,,2.1
+425__dissolve8,original,0,dissolve,8,124,132,,132,124,,,2.1
+425__dissolve16,original,0,dissolve,16,120,136,,,134,,,2.1
+425__dissolve32,original,0,dissolve,32,112,144,,,144,,,2.1
+425__dissolve64,original,0,dissolve,64,96,160,,,160,,,2.1
+429__control,original,0,control,0,0,0,,,,,,1.7
+429__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.6
+429__fade8,original,0,fade,8,124,132,128,124,124,128,,1.7
+429__fade16,original,0,fade,16,120,136,128,127,120,128,,1.7
+429__fade32,original,0,fade,32,112,144,127,127,125,129,,1.7
+429__dissolve8,original,0,dissolve,8,124,132,,,124,,,1.7
+429__dissolve16,original,0,dissolve,16,120,136,,,123,,,1.7
+429__dissolve32,original,0,dissolve,32,112,144,,,,,,1.7
+429__dissolve64,original,0,dissolve,64,96,160,,,,,,1.7
+445__control,original,0,control,0,0,0,,,,,,3.5
+445__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,3.5
+445__fade8,original,0,fade,8,124,132,128,126,124,128,,3.5
+445__fade16,original,0,fade,16,120,136,128,127,122,128,,3.5
+445__fade32,original,0,fade,32,112,144,128,127,125,127,,3.5
+445__dissolve8,original,0,dissolve,8,124,132,,130,124,,,3.5
+445__dissolve16,original,0,dissolve,16,120,136,,133,132,,,3.5
+445__dissolve32,original,0,dissolve,32,112,144,,,138,,,3.5
+445__dissolve64,original,0,dissolve,64,96,160,,,,,,3.5
+452__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,1.6
+452__control,original,0,control,0,0,0,,,250,,,1.6
+452__fade8,original,0,fade,8,124,132,127,127,124,128,,1.7
+452__fade32,original,0,fade,32,112,144,127,124,123,128,,1.7
+452__fade16,original,0,fade,16,120,136,127,126,123,128,,1.7
+452__dissolve8,original,0,dissolve,8,124,132,,124,124,,,1.7
+452__dissolve16,original,0,dissolve,16,120,136,,,120,,,1.7
+452__dissolve32,original,0,dissolve,32,112,144,,,112,,,1.7
+452__dissolve64,original,0,dissolve,64,96,160,,,,,,1.7
+454__hard_cut,original,0,hard_cut,0,128,128,128,128,128,,,2.1
+454__control,original,0,control,0,0,0,,,,,,2.1
+454__fade8,original,0,fade,8,124,132,128,127,124,128,,2.1
+454__fade16,original,0,fade,16,120,136,128,127,123,128,,2.1
+454__fade32,original,0,fade,32,112,144,127,127,124,128,,2.2
+454__dissolve8,original,0,dissolve,8,124,132,,124,124,,,2.1
+454__dissolve16,original,0,dissolve,16,120,136,,,120,,,2.2
+454__dissolve32,original,0,dissolve,32,112,144,,,112,,,2.2
+454__dissolve64,original,0,dissolve,64,96,160,,,,,,2.2
+000_003__control,Deepfakes,1,control,0,0,0,,,,,,1.7
+000_003__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.7
+000_003__fade8,Deepfakes,1,fade,8,124,132,127,126,124,128,,1.7
+000_003__fade16,Deepfakes,1,fade,16,120,136,128,127,121,128,,1.7
+000_003__fade32,Deepfakes,1,fade,32,112,144,127,127,122,129,,1.7
+000_003__dissolve8,Deepfakes,1,dissolve,8,124,132,,,130,,,1.7
+000_003__dissolve16,Deepfakes,1,dissolve,16,120,136,,,136,,,1.7
+000_003__dissolve32,Deepfakes,1,dissolve,32,112,144,,,,,,1.7
+000_003__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,1.8
+003_000__control,Deepfakes,1,control,0,0,0,,,,,,1.7
+003_000__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.7
+003_000__fade8,Deepfakes,1,fade,8,124,132,128,127,124,128,,1.7
+003_000__fade16,Deepfakes,1,fade,16,120,136,127,127,125,128,,1.8
+003_000__fade32,Deepfakes,1,fade,32,112,144,127,126,125,127,,1.7
+003_000__dissolve8,Deepfakes,1,dissolve,8,124,132,,,124,,,1.8
+003_000__dissolve16,Deepfakes,1,dissolve,16,120,136,,,,,,1.7
+003_000__dissolve32,Deepfakes,1,dissolve,32,112,144,,,,,,1.7
+003_000__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,1.7
+012_026__control,Deepfakes,1,control,0,0,0,,34,34,,,1.7
+012_026__hard_cut,Deepfakes,1,hard_cut,0,128,128,128 224,34 128 224,34 128 224,,,1.6
+012_026__fade8,Deepfakes,1,fade,8,124,132,127 227,34 126 228,34 124 228,128,,1.6
+012_026__fade16,Deepfakes,1,fade,16,120,136,127 227,34 126 228,34 123 228,128,,1.6
+012_026__fade32,Deepfakes,1,fade,32,112,144,127 227,34 126 228,34 123 228,128,,1.6
+012_026__dissolve8,Deepfakes,1,dissolve,8,124,132,224,34 224,34 124 228,,,1.6
+012_026__dissolve16,Deepfakes,1,dissolve,16,120,136,224,34 224,34 121 228,,,1.6
+012_026__dissolve32,Deepfakes,1,dissolve,32,112,144,224,34 224,34 224,,,1.6
+012_026__dissolve64,Deepfakes,1,dissolve,64,96,160,224,34 224,34 224,,,1.6
+015_919__control,Deepfakes,1,control,0,0,0,,,,,,1.7
+015_919__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.7
+015_919__fade8,Deepfakes,1,fade,8,124,132,128,127,124,128,,1.7
+015_919__fade16,Deepfakes,1,fade,16,120,136,127,127,122,128,,1.7
+015_919__fade32,Deepfakes,1,fade,32,112,144,127,126,123,127,,1.7
+015_919__dissolve8,Deepfakes,1,dissolve,8,124,132,,,124,,,1.7
+015_919__dissolve16,Deepfakes,1,dissolve,16,120,136,,,,,,1.7
+015_919__dissolve32,Deepfakes,1,dissolve,32,112,144,,,,,,1.7
+015_919__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,1.7
+024_073__control,Deepfakes,1,control,0,0,0,224,224,224,,,1.7
+024_073__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.7
+024_073__fade8,Deepfakes,1,fade,8,124,132,127,127,124,128,,1.7
+024_073__fade16,Deepfakes,1,fade,16,120,136,127,126,120,129,,1.7
+024_073__fade32,Deepfakes,1,fade,32,112,144,126,126,120,129,,1.7
+024_073__dissolve8,Deepfakes,1,dissolve,8,124,132,,132,124,,,1.7
+024_073__dissolve16,Deepfakes,1,dissolve,16,120,136,,,120 136,,,1.7
+024_073__dissolve32,Deepfakes,1,dissolve,32,112,144,,,,,,1.8
+024_073__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,1.7
+026_012__control,Deepfakes,1,control,0,0,0,,,,,,1.7
+026_012__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.8
+026_012__fade8,Deepfakes,1,fade,8,124,132,127,127,124,128,,1.8
+026_012__fade16,Deepfakes,1,fade,16,120,136,127,127,125,128,,1.7
+026_012__fade32,Deepfakes,1,fade,32,112,144,127,125,125,128,,1.7
+026_012__dissolve8,Deepfakes,1,dissolve,8,124,132,,,124,,,1.7
+026_012__dissolve16,Deepfakes,1,dissolve,16,120,136,,,120,,,1.7
+026_012__dissolve32,Deepfakes,1,dissolve,32,112,144,,,,,,1.7
+026_012__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,1.7
+029_048__control,Deepfakes,1,control,0,0,0,,,,,,1.7
+029_048__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.7
+029_048__fade8,Deepfakes,1,fade,8,124,132,128,127,124,128,,1.7
+029_048__fade16,Deepfakes,1,fade,16,120,136,127,126,123,128,,1.8
+029_048__fade32,Deepfakes,1,fade,32,112,144,127,126,123,128,,1.8
+029_048__dissolve8,Deepfakes,1,dissolve,8,124,132,,,124,,,1.8
+029_048__dissolve16,Deepfakes,1,dissolve,16,120,136,,,123,,,1.8
+029_048__dissolve32,Deepfakes,1,dissolve,32,112,144,,,,,,1.8
+029_048__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,1.8
+035_036__control,Deepfakes,1,control,0,0,0,,,,,,1.7
+035_036__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.7
+035_036__fade8,Deepfakes,1,fade,8,124,132,128,127,124,128,,1.7
+035_036__fade16,Deepfakes,1,fade,16,120,136,127,127,125,128,,1.7
+035_036__fade32,Deepfakes,1,fade,32,112,144,127,126,125 141,127,,1.7
+035_036__dissolve8,Deepfakes,1,dissolve,8,124,132,,,124,,,1.7
+035_036__dissolve32,Deepfakes,1,dissolve,32,112,144,,,144,,,1.7
+035_036__dissolve16,Deepfakes,1,dissolve,16,120,136,,,136,,,1.7
+035_036__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,1.7
+036_035__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.7
+036_035__control,Deepfakes,1,control,0,0,0,,,,,,1.7
+036_035__fade8,Deepfakes,1,fade,8,124,132,127,126,124,128,,1.7
+036_035__fade16,Deepfakes,1,fade,16,120,136,127,127,120,128,,1.7
+036_035__fade32,Deepfakes,1,fade,32,112,144,127,126,116,128,,1.7
+036_035__dissolve8,Deepfakes,1,dissolve,8,124,132,,124,124,,,1.7
+036_035__dissolve16,Deepfakes,1,dissolve,16,120,136,,,120 136 250,,,1.7
+036_035__dissolve32,Deepfakes,1,dissolve,32,112,144,,,112,,,1.7
+036_035__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,1.7
+044_945__control,Deepfakes,1,control,0,0,0,,,250,,,4.1
+044_945__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,4.1
+044_945__fade8,Deepfakes,1,fade,8,124,132,128,125,124,128,,4.1
+044_945__fade16,Deepfakes,1,fade,16,120,136,128,126,120,128,,4.0
+044_945__fade32,Deepfakes,1,fade,32,112,144,127,126,114 134,128,,4.0
+044_945__dissolve8,Deepfakes,1,dissolve,8,124,132,,124,124,,,4.0
+044_945__dissolve16,Deepfakes,1,dissolve,16,120,136,,,120 136,,,3.7
+044_945__dissolve32,Deepfakes,1,dissolve,32,112,144,,,112 144,,,3.8
+044_945__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,3.7
+047_862__control,Deepfakes,1,control,0,0,0,,,,,,2.3
+047_862__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,2.3
+047_862__fade8,Deepfakes,1,fade,8,124,132,128,127,124,128,,2.4
+047_862__fade16,Deepfakes,1,fade,16,120,136,127,127,123,128,,2.4
+047_862__fade32,Deepfakes,1,fade,32,112,144,127,126,125,128,,2.4
+047_862__dissolve8,Deepfakes,1,dissolve,8,124,132,,,124,,,2.4
+047_862__dissolve16,Deepfakes,1,dissolve,16,120,136,,,135,,,2.3
+047_862__dissolve32,Deepfakes,1,dissolve,32,112,144,,,,,,2.4
+047_862__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,2.4
+048_029__control,Deepfakes,1,control,0,0,0,,,59,,,1.8
+048_029__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,59 128,,,1.7
+048_029__fade8,Deepfakes,1,fade,8,124,132,127,126,59 124,128,,1.7
+048_029__fade16,Deepfakes,1,fade,16,120,136,127,126,59 123,129,,1.8
+048_029__fade32,Deepfakes,1,fade,32,112,144,127,126,59 123,129,,1.8
+048_029__dissolve8,Deepfakes,1,dissolve,8,124,132,,131,59 124,,,1.7
+048_029__dissolve16,Deepfakes,1,dissolve,16,120,136,,,59 131,,,1.8
+048_029__dissolve32,Deepfakes,1,dissolve,32,112,144,,,59 136,,,1.7
+048_029__dissolve64,Deepfakes,1,dissolve,64,96,160,,,59 154,,,1.7
+073_024__control,Deepfakes,1,control,0,0,0,,,,,,3.9
+073_024__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,3.9
+073_024__fade8,Deepfakes,1,fade,8,124,132,127,127,124,127,,3.8
+073_024__fade16,Deepfakes,1,fade,16,120,136,127,127,124,128,,3.6
+073_024__fade32,Deepfakes,1,fade,32,112,144,127,126,122,128,,3.7
+073_024__dissolve8,Deepfakes,1,dissolve,8,124,132,,,124,,,3.7
+073_024__dissolve16,Deepfakes,1,dissolve,16,120,136,,,135,,,3.6
+073_024__dissolve32,Deepfakes,1,dissolve,32,112,144,,,,,,3.6
+073_024__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,3.6
+078_955__control,Deepfakes,1,control,0,0,0,,,,,,3.6
+078_955__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,3.6
+078_955__fade8,Deepfakes,1,fade,8,124,132,127,126,124,128,,3.6
+078_955__fade16,Deepfakes,1,fade,16,120,136,127,127,123,128,,3.7
+078_955__fade32,Deepfakes,1,fade,32,112,144,127,127,123,128,,3.7
+078_955__dissolve8,Deepfakes,1,dissolve,8,124,132,,,124,,,3.7
+078_955__dissolve16,Deepfakes,1,dissolve,16,120,136,,,121,,,3.8
+078_955__dissolve32,Deepfakes,1,dissolve,32,112,144,,,,,,3.9
+078_955__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,3.8
+102_114__control,Deepfakes,1,control,0,0,0,,,,,,1.6
+102_114__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.6
+102_114__fade8,Deepfakes,1,fade,8,124,132,128,127,124,128,,1.6
+102_114__fade16,Deepfakes,1,fade,16,120,136,128,126,122,129,,1.6
+102_114__fade32,Deepfakes,1,fade,32,112,144,128,126,123,128,,1.6
+102_114__dissolve8,Deepfakes,1,dissolve,8,124,132,,126,124,,,1.6
+102_114__dissolve16,Deepfakes,1,dissolve,16,120,136,,,120,,,1.6
+102_114__dissolve32,Deepfakes,1,dissolve,32,112,144,,,,,,1.6
+102_114__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,1.6
+114_102__control,Deepfakes,1,control,0,0,0,,,250,,,1.6
+114_102__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.7
+114_102__fade8,Deepfakes,1,fade,8,124,132,127,126,124,128,,1.7
+114_102__fade16,Deepfakes,1,fade,16,120,136,128,125,121,128,,1.6
+114_102__fade32,Deepfakes,1,fade,32,112,144,126,125,117 138,127,,1.7
+114_102__dissolve8,Deepfakes,1,dissolve,8,124,132,,124,124,,,1.7
+114_102__dissolve16,Deepfakes,1,dissolve,16,120,136,,120,120 136 250,,,1.6
+114_102__dissolve32,Deepfakes,1,dissolve,32,112,144,,,112 138 250,,,1.6
+114_102__dissolve64,Deepfakes,1,dissolve,64,96,160,,,96,,,1.6
+128_896__control,Deepfakes,1,control,0,0,0,,,250,,,1.7
+128_896__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,1.6
+128_896__fade8,Deepfakes,1,fade,8,124,132,128,124,124,127,,1.7
+128_896__fade16,Deepfakes,1,fade,16,120,136,127,127,120 136,128,,1.6
+128_896__fade32,Deepfakes,1,fade,32,112,144,127,126,116,128,,1.6
+128_896__dissolve8,Deepfakes,1,dissolve,8,124,132,,124,124,,,1.7
+128_896__dissolve16,Deepfakes,1,dissolve,16,120,136,,,120,,,1.7
+128_896__dissolve32,Deepfakes,1,dissolve,32,112,144,,,113,,,1.7
+128_896__dissolve64,Deepfakes,1,dissolve,64,96,160,,,,,,1.7
+135_880__hard_cut,Deepfakes,1,hard_cut,0,128,128,128,128,128,,,4.0
+135_880__control,Deepfakes,1,control,0,0,0,,,,,,4.1
+135_880__fade8,Deepfakes,1,fade,8,124,132,128,127,124,128,,4.0
+135_880__fade16,Deepfakes,1,fade,16,120,136,127,127,123,128,,4.2
+135_880__fade32,Deepfakes,1,fade,32,112,144,127,126,118 134 250,127,,4.2
+135_880__dissolve8,Deepfakes,1,dissolve,8,124,132,,124,124,,,4.2
+135_880__dissolve32,Deepfakes,1,dissolve,32,112,144,,112,112,,,4.1
+135_880__dissolve16,Deepfakes,1,dissolve,16,120,136,,,120 136 250,,,4.1
+135_880__dissolve64,Deepfakes,1,dissolve,64,96,160,,,96 250,,,4.1
+000_003__control,Face2Face,1,control,0,0,0,,,,,,1.7
+000_003__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,1.7
+000_003__fade8,Face2Face,1,fade,8,124,132,127,124,124,128,,1.7
+000_003__fade32,Face2Face,1,fade,32,112,144,127,126,124,129,,1.7
+000_003__fade16,Face2Face,1,fade,16,120,136,128,127,121,128,,1.7
+000_003__dissolve8,Face2Face,1,dissolve,8,124,132,,,130,,,1.7
+000_003__dissolve16,Face2Face,1,dissolve,16,120,136,,,136,,,1.7
+000_003__dissolve32,Face2Face,1,dissolve,32,112,144,,,,,,1.7
+000_003__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,1.7
+003_000__control,Face2Face,1,control,0,0,0,,,,,,1.7
+003_000__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,1.7
+003_000__fade8,Face2Face,1,fade,8,124,132,128,127,124,128,,1.7
+003_000__fade16,Face2Face,1,fade,16,120,136,127,127,125,128,,1.7
+003_000__fade32,Face2Face,1,fade,32,112,144,127,126,125,127,,1.7
+003_000__dissolve8,Face2Face,1,dissolve,8,124,132,,,124,,,1.7
+003_000__dissolve16,Face2Face,1,dissolve,16,120,136,,,,,,1.7
+003_000__dissolve32,Face2Face,1,dissolve,32,112,144,,,,,,1.7
+003_000__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,1.7
+012_026__control,Face2Face,1,control,0,0,0,,34,34,,,1.8
+012_026__hard_cut,Face2Face,1,hard_cut,0,128,128,128 225,34 128 224,34 128 224,,,1.7
+012_026__fade8,Face2Face,1,fade,8,124,132,127 227,34 127 228,34 124 228,128,,1.8
+012_026__fade16,Face2Face,1,fade,16,120,136,127 227,34 126 228,34 123 228,128,,1.7
+012_026__fade32,Face2Face,1,fade,32,112,144,127 227,34 126 228,34 123 228,128,,1.7
+012_026__dissolve8,Face2Face,1,dissolve,8,124,132,225,34 224,34 124 228,,,1.7
+012_026__dissolve32,Face2Face,1,dissolve,32,112,144,225,34 224,34 224,,,1.7
+012_026__dissolve16,Face2Face,1,dissolve,16,120,136,225,34 224,34 120 228,,,1.7
+012_026__dissolve64,Face2Face,1,dissolve,64,96,160,225,34 224,34 224,,,1.7
+015_919__control,Face2Face,1,control,0,0,0,,,,,,1.7
+015_919__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,1.7
+015_919__fade8,Face2Face,1,fade,8,124,132,128,127,124,128,,1.8
+015_919__fade16,Face2Face,1,fade,16,120,136,127,127,122,128,,1.7
+015_919__fade32,Face2Face,1,fade,32,112,144,127,126,123,127,,1.7
+015_919__dissolve8,Face2Face,1,dissolve,8,124,132,,,124,,,1.7
+015_919__dissolve32,Face2Face,1,dissolve,32,112,144,,,,,,1.7
+015_919__dissolve16,Face2Face,1,dissolve,16,120,136,,,120,,,1.8
+015_919__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,1.7
+024_073__control,Face2Face,1,control,0,0,0,225,224,224,,,1.7
+024_073__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,1.7
+024_073__fade8,Face2Face,1,fade,8,124,132,127,127,124,128,,1.7
+024_073__fade16,Face2Face,1,fade,16,120,136,127,126,120,129,,1.7
+024_073__fade32,Face2Face,1,fade,32,112,144,126,126,120,129,,1.7
+024_073__dissolve8,Face2Face,1,dissolve,8,124,132,,132,124,,,1.7
+024_073__dissolve16,Face2Face,1,dissolve,16,120,136,,,120 136,,,1.7
+024_073__dissolve32,Face2Face,1,dissolve,32,112,144,,,,,,1.7
+024_073__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,1.7
+026_012__control,Face2Face,1,control,0,0,0,,,,,,1.7
+026_012__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,1.7
+026_012__fade8,Face2Face,1,fade,8,124,132,127,127,124,128,,1.7
+026_012__fade16,Face2Face,1,fade,16,120,136,127,127,124,128,,1.6
+026_012__fade32,Face2Face,1,fade,32,112,144,127,126,123,128,,1.6
+026_012__dissolve8,Face2Face,1,dissolve,8,124,132,,,124,,,1.6
+026_012__dissolve16,Face2Face,1,dissolve,16,120,136,,,120,,,1.7
+026_012__dissolve32,Face2Face,1,dissolve,32,112,144,,,,,,1.7
+026_012__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,1.7
+029_048__control,Face2Face,1,control,0,0,0,,,,,,1.8
+029_048__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,1.8
+029_048__fade8,Face2Face,1,fade,8,124,132,128,127,124,128,,1.8
+029_048__fade16,Face2Face,1,fade,16,120,136,127,127,123,128,,1.7
+029_048__fade32,Face2Face,1,fade,32,112,144,127,126,125,128,,1.7
+029_048__dissolve8,Face2Face,1,dissolve,8,124,132,,,124,,,1.8
+029_048__dissolve32,Face2Face,1,dissolve,32,112,144,,,,,,1.7
+029_048__dissolve16,Face2Face,1,dissolve,16,120,136,,,123,,,1.7
+029_048__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,1.8
+035_036__control,Face2Face,1,control,0,0,0,,,,,,1.6
+035_036__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,1.6
+035_036__fade8,Face2Face,1,fade,8,124,132,128,127,124,128,,1.6
+035_036__fade16,Face2Face,1,fade,16,120,136,127,127,125,128,,1.7
+035_036__fade32,Face2Face,1,fade,32,112,144,127,126,124 141,127,,1.7
+035_036__dissolve8,Face2Face,1,dissolve,8,124,132,,,124,,,1.7
+035_036__dissolve16,Face2Face,1,dissolve,16,120,136,,,136,,,1.7
+035_036__dissolve32,Face2Face,1,dissolve,32,112,144,,,144,,,1.7
+035_036__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,1.7
+036_035__control,Face2Face,1,control,0,0,0,,,,,,1.7
+036_035__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,1.7
+036_035__fade8,Face2Face,1,fade,8,124,132,127,126,124,128,,1.7
+036_035__fade16,Face2Face,1,fade,16,120,136,127,127,121,128,,1.7
+036_035__fade32,Face2Face,1,fade,32,112,144,128,124,116,128,,1.7
+036_035__dissolve8,Face2Face,1,dissolve,8,124,132,,124,124,,,1.7
+036_035__dissolve16,Face2Face,1,dissolve,16,120,136,,,120 136,,,1.7
+036_035__dissolve32,Face2Face,1,dissolve,32,112,144,,,112,,,1.7
+036_035__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,1.7
+044_945__control,Face2Face,1,control,0,0,0,,,250,,,4.1
+044_945__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,4.1
+044_945__fade8,Face2Face,1,fade,8,124,132,128,124,124,128,,4.1
+044_945__fade16,Face2Face,1,fade,16,120,136,128,127,120,128,,3.9
+044_945__fade32,Face2Face,1,fade,32,112,144,127,126,114 134,128,,3.9
+044_945__dissolve8,Face2Face,1,dissolve,8,124,132,,124,124,,,3.8
+044_945__dissolve16,Face2Face,1,dissolve,16,120,136,,,120 136,,,4.3
+044_945__dissolve32,Face2Face,1,dissolve,32,112,144,,,112 140,,,4.4
+044_945__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,4.3
+047_862__control,Face2Face,1,control,0,0,0,,,,,,2.3
+047_862__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,2.3
+047_862__fade8,Face2Face,1,fade,8,124,132,127,127,124,128,,2.3
+047_862__fade16,Face2Face,1,fade,16,120,136,127,127,123,128,,2.2
+047_862__fade32,Face2Face,1,fade,32,112,144,127,126,125,128,,2.2
+047_862__dissolve8,Face2Face,1,dissolve,8,124,132,,,124,,,2.2
+047_862__dissolve16,Face2Face,1,dissolve,16,120,136,,,135,,,2.1
+047_862__dissolve32,Face2Face,1,dissolve,32,112,144,,,,,,2.1
+047_862__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,2.1
+048_029__control,Face2Face,1,control,0,0,0,,,59,,,1.7
+048_029__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,59 128,,,1.7
+048_029__fade8,Face2Face,1,fade,8,124,132,127,126,59 124,128,,1.7
+048_029__fade16,Face2Face,1,fade,16,120,136,127,126,59 123,129,,1.9
+048_029__fade32,Face2Face,1,fade,32,112,144,127,126,59 123,129,,1.9
+048_029__dissolve8,Face2Face,1,dissolve,8,124,132,,131,59 124,,,1.9
+048_029__dissolve16,Face2Face,1,dissolve,16,120,136,,135,59 128,,,2.7
+048_029__dissolve64,Face2Face,1,dissolve,64,96,160,,,59 154,,,2.6
+048_029__dissolve32,Face2Face,1,dissolve,32,112,144,,,59 138,,,2.7
+073_024__control,Face2Face,1,control,0,0,0,,,,,,5.1
+073_024__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,5.2
+073_024__fade8,Face2Face,1,fade,8,124,132,127,127,124,127,,5.2
+073_024__fade16,Face2Face,1,fade,16,120,136,127,127,124,128,,4.6
+073_024__fade32,Face2Face,1,fade,32,112,144,127,126,124,128,,4.7
+073_024__dissolve8,Face2Face,1,dissolve,8,124,132,,,124,,,4.7
+073_024__dissolve16,Face2Face,1,dissolve,16,120,136,,,135,,,5.1
+073_024__dissolve32,Face2Face,1,dissolve,32,112,144,,,,,,5.1
+073_024__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,5.1
+078_955__control,Face2Face,1,control,0,0,0,,,,,,5.2
+078_955__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,5.2
+078_955__fade8,Face2Face,1,fade,8,124,132,127,124,124,128,,5.1
+078_955__fade16,Face2Face,1,fade,16,120,136,128,127,123,128,,5.0
+078_955__fade32,Face2Face,1,fade,32,112,144,128,127,123,128,,5.1
+078_955__dissolve8,Face2Face,1,dissolve,8,124,132,,124,124,,,5.4
+078_955__dissolve16,Face2Face,1,dissolve,16,120,136,,,122,,,6.3
+078_955__dissolve32,Face2Face,1,dissolve,32,112,144,,,114,,,6.4
+078_955__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,6.0
+102_114__control,Face2Face,1,control,0,0,0,,,,,,2.1
+102_114__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,2.1
+102_114__fade8,Face2Face,1,fade,8,124,132,128,127,124,128,,2.1
+102_114__fade16,Face2Face,1,fade,16,120,136,128,126,122,129,,1.9
+102_114__fade32,Face2Face,1,fade,32,112,144,128,126,123,128,,1.8
+102_114__dissolve8,Face2Face,1,dissolve,8,124,132,,126,124,,,1.8
+102_114__dissolve16,Face2Face,1,dissolve,16,120,136,,,120,,,2.1
+102_114__dissolve32,Face2Face,1,dissolve,32,112,144,,,,,,2.1
+102_114__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,2.1
+114_102__control,Face2Face,1,control,0,0,0,,,250,,,2.5
+114_102__fade8,Face2Face,1,fade,8,124,132,127,126,124,128,,2.4
+114_102__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,2.4
+114_102__fade16,Face2Face,1,fade,16,120,136,127,126,121,128,,2.3
+114_102__fade32,Face2Face,1,fade,32,112,144,127,124,119 138,127,,2.2
+114_102__dissolve8,Face2Face,1,dissolve,8,124,132,,124,124,,,2.3
+114_102__dissolve16,Face2Face,1,dissolve,16,120,136,,120,120 136,,,2.2
+114_102__dissolve32,Face2Face,1,dissolve,32,112,144,,,112 138,,,2.1
+114_102__dissolve64,Face2Face,1,dissolve,64,96,160,,,96,,,2.2
+128_896__control,Face2Face,1,control,0,0,0,,,,,,2.0
+128_896__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,2.0
+128_896__fade8,Face2Face,1,fade,8,124,132,127,126,124,127,,2.2
+128_896__fade16,Face2Face,1,fade,16,120,136,127,127,120 136,128,,2.1
+128_896__fade32,Face2Face,1,fade,32,112,144,127,126,116,128,,2.2
+128_896__dissolve8,Face2Face,1,dissolve,8,124,132,,124,124,,,1.9
+128_896__dissolve16,Face2Face,1,dissolve,16,120,136,,,120,,,2.3
+128_896__dissolve32,Face2Face,1,dissolve,32,112,144,,,112,,,2.2
+128_896__dissolve64,Face2Face,1,dissolve,64,96,160,,,,,,2.2
+135_880__control,Face2Face,1,control,0,0,0,,,,,,4.9
+135_880__hard_cut,Face2Face,1,hard_cut,0,128,128,128,128,128,,,4.9
+135_880__fade8,Face2Face,1,fade,8,124,132,128,127,124,128,,5.0
+135_880__fade16,Face2Face,1,fade,16,120,136,127,127,123,128,,5.2
+135_880__fade32,Face2Face,1,fade,32,112,144,127,126,118 134,127,,5.4
+135_880__dissolve8,Face2Face,1,dissolve,8,124,132,,124,124,,,5.4
+135_880__dissolve64,Face2Face,1,dissolve,64,96,160,,,96 250,,,4.7
+135_880__dissolve16,Face2Face,1,dissolve,16,120,136,,,120 136 250,,,5.1
+135_880__dissolve32,Face2Face,1,dissolve,32,112,144,,112,112,,,5.0
+000_003__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,2.2
+000_003__control,FaceSwap,1,control,0,0,0,,,,,,2.3
+000_003__fade8,FaceSwap,1,fade,8,124,132,127,124,124,128,,2.2
+000_003__fade32,FaceSwap,1,fade,32,112,144,127,126,124,129,,2.4
+000_003__fade16,FaceSwap,1,fade,16,120,136,128,127,121,128,,2.6
+000_003__dissolve8,FaceSwap,1,dissolve,8,124,132,,,130,,,2.5
+000_003__dissolve16,FaceSwap,1,dissolve,16,120,136,,,136,,,2.3
+000_003__dissolve32,FaceSwap,1,dissolve,32,112,144,,,,,,2.3
+000_003__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,2.7
+003_000__control,FaceSwap,1,control,0,0,0,,,,,,2.3
+003_000__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,2.7
+003_000__fade8,FaceSwap,1,fade,8,124,132,128,127,124,128,,2.6
+003_000__fade16,FaceSwap,1,fade,16,120,136,127,127,125,128,,2.6
+003_000__fade32,FaceSwap,1,fade,32,112,144,127,126,125,127,,2.5
+003_000__dissolve8,FaceSwap,1,dissolve,8,124,132,,,124,,,2.6
+003_000__dissolve16,FaceSwap,1,dissolve,16,120,136,,,,,,2.2
+003_000__dissolve32,FaceSwap,1,dissolve,32,112,144,,,,,,2.4
+003_000__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,2.6
+012_026__control,FaceSwap,1,control,0,0,0,,34,34,,,2.2
+012_026__hard_cut,FaceSwap,1,hard_cut,0,128,128,128 225,34 128 224,34 128 224,,,2.2
+012_026__fade8,FaceSwap,1,fade,8,124,132,127 227,34 127 228,34 124 228,128,,2.0
+012_026__fade16,FaceSwap,1,fade,16,120,136,127 227,34 126 228,34 123 228,128,,1.8
+012_026__fade32,FaceSwap,1,fade,32,112,144,127 227,34 126 228,34 123 228,128,,1.9
+012_026__dissolve8,FaceSwap,1,dissolve,8,124,132,224,34 224,34 124 228,,,2.6
+012_026__dissolve16,FaceSwap,1,dissolve,16,120,136,225,34 224,34 120 228,,,2.6
+012_026__dissolve32,FaceSwap,1,dissolve,32,112,144,225,34 224,34 224,,,2.7
+012_026__dissolve64,FaceSwap,1,dissolve,64,96,160,225,34 224,34 224,,,2.3
+015_919__control,FaceSwap,1,control,0,0,0,,,,,,2.2
+015_919__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,2.0
+015_919__fade8,FaceSwap,1,fade,8,124,132,128,127,124,128,,2.0
+015_919__fade16,FaceSwap,1,fade,16,120,136,127,126,123,128,,2.0
+015_919__fade32,FaceSwap,1,fade,32,112,144,127,126,125,127,,2.3
+015_919__dissolve8,FaceSwap,1,dissolve,8,124,132,,,124,,,2.2
+015_919__dissolve16,FaceSwap,1,dissolve,16,120,136,,,,,,2.3
+015_919__dissolve32,FaceSwap,1,dissolve,32,112,144,,,,,,1.9
+015_919__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,1.8
+024_073__control,FaceSwap,1,control,0,0,0,225,224,224,,,2.0
+024_073__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,2.0
+024_073__fade8,FaceSwap,1,fade,8,124,132,127,127,124,128,,2.1
+024_073__fade16,FaceSwap,1,fade,16,120,136,127,126,120,129,,1.8
+024_073__fade32,FaceSwap,1,fade,32,112,144,126,126,120,129,,1.8
+024_073__dissolve8,FaceSwap,1,dissolve,8,124,132,,132,124,,,1.8
+024_073__dissolve16,FaceSwap,1,dissolve,16,120,136,,,120 136,,,1.8
+024_073__dissolve32,FaceSwap,1,dissolve,32,112,144,,,,,,1.8
+024_073__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,1.9
+026_012__control,FaceSwap,1,control,0,0,0,,,,,,1.8
+026_012__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,1.9
+026_012__fade8,FaceSwap,1,fade,8,124,132,127,127,124,128,,1.7
+026_012__fade16,FaceSwap,1,fade,16,120,136,127,126,125,128,,2.1
+026_012__fade32,FaceSwap,1,fade,32,112,144,127,126,123,128,,2.0
+026_012__dissolve8,FaceSwap,1,dissolve,8,124,132,,,124,,,2.2
+026_012__dissolve16,FaceSwap,1,dissolve,16,120,136,,,120,,,2.0
+026_012__dissolve32,FaceSwap,1,dissolve,32,112,144,,,,,,2.2
+026_012__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,2.2
+029_048__control,FaceSwap,1,control,0,0,0,,,,,,2.2
+029_048__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,2.5
+029_048__fade8,FaceSwap,1,fade,8,124,132,128,127,124,128,,2.4
+029_048__fade16,FaceSwap,1,fade,16,120,136,127,126,123,128,,2.3
+029_048__fade32,FaceSwap,1,fade,32,112,144,127,126,125,128,,2.1
+029_048__dissolve8,FaceSwap,1,dissolve,8,124,132,,132,124,,,2.5
+029_048__dissolve16,FaceSwap,1,dissolve,16,120,136,,,120,,,2.8
+029_048__dissolve32,FaceSwap,1,dissolve,32,112,144,,,250,,,2.8
+029_048__dissolve64,FaceSwap,1,dissolve,64,96,160,,,250,,,2.5
+035_036__control,FaceSwap,1,control,0,0,0,,,,,,2.2
+035_036__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,2.4
+035_036__fade8,FaceSwap,1,fade,8,124,132,128,127,124,128,,2.3
+035_036__fade16,FaceSwap,1,fade,16,120,136,128,127,125,128,,3.0
+035_036__fade32,FaceSwap,1,fade,32,112,144,127,127,125 141,127,,3.0
+035_036__dissolve8,FaceSwap,1,dissolve,8,124,132,,132,124,,,2.8
+035_036__dissolve16,FaceSwap,1,dissolve,16,120,136,,,135,,,2.2
+035_036__dissolve32,FaceSwap,1,dissolve,32,112,144,,,144,,,2.2
+035_036__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,2.3
+036_035__control,FaceSwap,1,control,0,0,0,,,,,,2.3
+036_035__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,2.7
+036_035__fade8,FaceSwap,1,fade,8,124,132,127,126,124,128,,2.7
+036_035__fade16,FaceSwap,1,fade,16,120,136,127,126,121,128,,2.3
+036_035__fade32,FaceSwap,1,fade,32,112,144,127,125,116 136,128,,2.8
+036_035__dissolve8,FaceSwap,1,dissolve,8,124,132,,124,124,,,2.6
+036_035__dissolve16,FaceSwap,1,dissolve,16,120,136,,,120 136,,,2.5
+036_035__dissolve32,FaceSwap,1,dissolve,32,112,144,,,112,,,2.5
+036_035__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,2.5
+044_945__control,FaceSwap,1,control,0,0,0,,,250,,,5.5
+044_945__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,5.2
+044_945__fade8,FaceSwap,1,fade,8,124,132,128,125,124,128,,5.4
+044_945__fade16,FaceSwap,1,fade,16,120,136,128,126,121,128,,5.4
+044_945__fade32,FaceSwap,1,fade,32,112,144,127,127,114 133,128,,5.3
+044_945__dissolve8,FaceSwap,1,dissolve,8,124,132,,,124,,,5.3
+044_945__dissolve16,FaceSwap,1,dissolve,16,120,136,,,120,,,4.9
+044_945__dissolve32,FaceSwap,1,dissolve,32,112,144,,,112,,,5.4
+044_945__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,5.4
+047_862__control,FaceSwap,1,control,0,0,0,,,,,,3.5
+047_862__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,2.9
+047_862__fade8,FaceSwap,1,fade,8,124,132,128,127,124,128,,3.2
+047_862__fade16,FaceSwap,1,fade,16,120,136,127,127,123,128,,3.0
+047_862__fade32,FaceSwap,1,fade,32,112,144,127,126,125,128,,3.0
+047_862__dissolve8,FaceSwap,1,dissolve,8,124,132,,,124,,,3.1
+047_862__dissolve16,FaceSwap,1,dissolve,16,120,136,,,135,,,2.9
+047_862__dissolve32,FaceSwap,1,dissolve,32,112,144,,,,,,3.0
+048_029__control,FaceSwap,1,control,0,0,0,,,59,,,2.0
+047_862__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,3.4
+048_029__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,59 128,,,2.4
+048_029__fade8,FaceSwap,1,fade,8,124,132,127,126,59 124,128,,2.4
+048_029__fade16,FaceSwap,1,fade,16,120,136,127,126,59 123,129,,2.3
+048_029__fade32,FaceSwap,1,fade,32,112,144,127,126,59 123,129,,2.2
+048_029__dissolve8,FaceSwap,1,dissolve,8,124,132,,131,59 124,,,2.2
+048_029__dissolve16,FaceSwap,1,dissolve,16,120,136,,135,59 128,,,2.5
+048_029__dissolve32,FaceSwap,1,dissolve,32,112,144,,,59 137,,,2.3
+048_029__dissolve64,FaceSwap,1,dissolve,64,96,160,,,59 153,,,2.6
+073_024__control,FaceSwap,1,control,0,0,0,,,,,,5.9
+073_024__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,6.1
+073_024__fade8,FaceSwap,1,fade,8,124,132,127,127,124,127,,5.7
+073_024__fade16,FaceSwap,1,fade,16,120,136,127,127,124,128,,5.4
+073_024__fade32,FaceSwap,1,fade,32,112,144,127,126,124,128,,5.0
+073_024__dissolve8,FaceSwap,1,dissolve,8,124,132,,,124,,,5.4
+073_024__dissolve16,FaceSwap,1,dissolve,16,120,136,,,135,,,5.2
+073_024__dissolve32,FaceSwap,1,dissolve,32,112,144,,,,,,5.1
+073_024__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,5.2
+078_955__control,FaceSwap,1,control,0,0,0,,,,,,5.3
+078_955__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,5.1
+078_955__fade8,FaceSwap,1,fade,8,124,132,127,126,124,128,,5.0
+078_955__fade16,FaceSwap,1,fade,16,120,136,127,127,123,128,,4.7
+078_955__fade32,FaceSwap,1,fade,32,112,144,127,127,123,128,,4.6
+078_955__dissolve8,FaceSwap,1,dissolve,8,124,132,,,124,,,4.5
+078_955__dissolve16,FaceSwap,1,dissolve,16,120,136,,,121,,,4.8
+078_955__dissolve32,FaceSwap,1,dissolve,32,112,144,,,,,,4.7
+078_955__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,4.6
+102_114__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,1.9
+102_114__control,FaceSwap,1,control,0,0,0,,,,,,2.0
+102_114__fade8,FaceSwap,1,fade,8,124,132,128,127,124,128,,2.0
+102_114__fade16,FaceSwap,1,fade,16,120,136,127,127,123,129,,1.7
+102_114__fade32,FaceSwap,1,fade,32,112,144,128,126,123,128,,1.8
+102_114__dissolve8,FaceSwap,1,dissolve,8,124,132,,126,124,,,1.9
+102_114__dissolve16,FaceSwap,1,dissolve,16,120,136,,,120,,,1.8
+102_114__dissolve32,FaceSwap,1,dissolve,32,112,144,,,,,,1.9
+102_114__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,1.9
+114_102__control,FaceSwap,1,control,0,0,0,,,250,,,1.8
+114_102__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,1.8
+114_102__fade8,FaceSwap,1,fade,8,124,132,127,126,124,128,,2.0
+114_102__fade32,FaceSwap,1,fade,32,112,144,127,124,120 139,127,,2.1
+114_102__fade16,FaceSwap,1,fade,16,120,136,127,126,121,128,,2.2
+114_102__dissolve8,FaceSwap,1,dissolve,8,124,132,,124,124,,,2.0
+114_102__dissolve16,FaceSwap,1,dissolve,16,120,136,,120,120 136 250,,,1.7
+114_102__dissolve32,FaceSwap,1,dissolve,32,112,144,,,112,,,1.7
+114_102__dissolve64,FaceSwap,1,dissolve,64,96,160,,,96,,,1.8
+128_896__control,FaceSwap,1,control,0,0,0,,,250,,,1.9
+128_896__hard_cut,FaceSwap,1,hard_cut,0,128,128,128,128,128,,,1.9
+128_896__fade8,FaceSwap,1,fade,8,124,132,128,126,124,127,,2.0
+128_896__fade16,FaceSwap,1,fade,16,120,136,127,127,121,128,,2.1
+128_896__fade32,FaceSwap,1,fade,32,112,144,127,126,116,128,,2.1
+128_896__dissolve8,FaceSwap,1,dissolve,8,124,132,,124,124,,,1.9
+128_896__dissolve16,FaceSwap,1,dissolve,16,120,136,,,120,,,1.9
+128_896__dissolve32,FaceSwap,1,dissolve,32,112,144,,,113,,,1.9
+128_896__dissolve64,FaceSwap,1,dissolve,64,96,160,,,,,,2.2
+000_003__control,NeuralTextures,1,control,0,0,0,,,,,,2.2
+000_003__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,2.1
+000_003__fade8,NeuralTextures,1,fade,8,124,132,127,126,124,128,,2.0
+000_003__fade32,NeuralTextures,1,fade,32,112,144,127,126,124,129,,1.9
+000_003__fade16,NeuralTextures,1,fade,16,120,136,128,127,121,128,,1.9
+000_003__dissolve8,NeuralTextures,1,dissolve,8,124,132,,,130,,,2.0
+000_003__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,136,,,2.2
+000_003__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,,,,2.2
+000_003__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,2.1
+003_000__control,NeuralTextures,1,control,0,0,0,,,,,,1.8
+003_000__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,2.0
+003_000__fade8,NeuralTextures,1,fade,8,124,132,128,127,124,128,,2.1
+003_000__fade16,NeuralTextures,1,fade,16,120,136,127,127,125,128,,2.1
+003_000__fade32,NeuralTextures,1,fade,32,112,144,127,126,125,127,,2.1
+003_000__dissolve8,NeuralTextures,1,dissolve,8,124,132,,,124,,,1.8
+003_000__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,,,,2.0
+003_000__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,,,,2.0
+003_000__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,2.0
+012_026__control,NeuralTextures,1,control,0,0,0,,34,34,,,2.1
+012_026__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128 224,34 128 224,34 128 224,,,2.1
+012_026__fade8,NeuralTextures,1,fade,8,124,132,127 228,34 127 228,34 124 228,128,,2.4
+012_026__fade16,NeuralTextures,1,fade,16,120,136,127 228,34 126 228,34 123 228,128,,2.1
+012_026__fade32,NeuralTextures,1,fade,32,112,144,127 228,34 125 228,34 123 228,128,,2.2
+012_026__dissolve8,NeuralTextures,1,dissolve,8,124,132,224,34 224,34 124 228,,,2.0
+012_026__dissolve16,NeuralTextures,1,dissolve,16,120,136,224,34 224,34 120 228,,,1.9
+012_026__dissolve32,NeuralTextures,1,dissolve,32,112,144,224,34 224,34 224,,,2.0
+012_026__dissolve64,NeuralTextures,1,dissolve,64,96,160,224,34 224,34 224,,,1.8
+015_919__control,NeuralTextures,1,control,0,0,0,,,,,,1.8
+015_919__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,2.0
+015_919__fade8,NeuralTextures,1,fade,8,124,132,128,127,124,128,,1.9
+015_919__fade16,NeuralTextures,1,fade,16,120,136,127,127,124,128,,2.2
+015_919__fade32,NeuralTextures,1,fade,32,112,144,127,126,123,127,,2.0
+015_919__dissolve8,NeuralTextures,1,dissolve,8,124,132,,,124,,,1.9
+015_919__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,120,,,1.9
+015_919__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,,,,2.0
+015_919__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,2.0
+024_073__control,NeuralTextures,1,control,0,0,0,224,224,224,,,2.2
+024_073__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,2.2
+024_073__fade8,NeuralTextures,1,fade,8,124,132,127,127,124,128,,2.0
+024_073__fade16,NeuralTextures,1,fade,16,120,136,127,126,120,129,,2.4
+024_073__fade32,NeuralTextures,1,fade,32,112,144,126,126,120,129,,2.3
+024_073__dissolve8,NeuralTextures,1,dissolve,8,124,132,,132,124,,,2.1
+024_073__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,120 136,,,2.0
+024_073__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,,,,2.1
+024_073__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,2.1
+026_012__control,NeuralTextures,1,control,0,0,0,,,,,,2.0
+026_012__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,1.9
+026_012__fade8,NeuralTextures,1,fade,8,124,132,127,127,124,128,,2.0
+026_012__fade16,NeuralTextures,1,fade,16,120,136,127,127,125,128,,2.2
+026_012__fade32,NeuralTextures,1,fade,32,112,144,127,126,123,128,,2.3
+026_012__dissolve8,NeuralTextures,1,dissolve,8,124,132,,,124,,,2.2
+026_012__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,120,,,2.1
+026_012__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,1.9
+026_012__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,,,,2.0
+029_048__control,NeuralTextures,1,control,0,0,0,,,,,,1.8
+029_048__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,1.9
+029_048__fade8,NeuralTextures,1,fade,8,124,132,128,127,124,128,,1.9
+029_048__fade16,NeuralTextures,1,fade,16,120,136,127,127,123,128,,2.1
+029_048__dissolve8,NeuralTextures,1,dissolve,8,124,132,,132,124,,,1.9
+029_048__fade32,NeuralTextures,1,fade,32,112,144,127,126,125,128,,2.0
+029_048__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,127,,,2.0
+029_048__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,250,,,2.1
+029_048__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,250,,,2.1
+035_036__control,NeuralTextures,1,control,0,0,0,,,,,,1.8
+035_036__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,1.9
+035_036__fade8,NeuralTextures,1,fade,8,124,132,128,127,124,128,,2.0
+035_036__fade16,NeuralTextures,1,fade,16,120,136,127,127,125,128,,1.8
+035_036__fade32,NeuralTextures,1,fade,32,112,144,127,126,125 141,127,,1.7
+035_036__dissolve8,NeuralTextures,1,dissolve,8,124,132,,,124,,,1.8
+035_036__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,136,,,2.0
+035_036__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,,,,2.3
+035_036__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,2.1
+036_035__control,NeuralTextures,1,control,0,0,0,,,,,,2.1
+036_035__fade8,NeuralTextures,1,fade,8,124,132,127,127,124,128,,1.9
+036_035__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,1.9
+036_035__fade16,NeuralTextures,1,fade,16,120,136,127,126,121,128,,1.7
+036_035__dissolve8,NeuralTextures,1,dissolve,8,124,132,,124,124,,,1.7
+036_035__fade32,NeuralTextures,1,fade,32,112,144,128,126,116,128,,1.7
+036_035__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,120 136,,,1.8
+036_035__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,1.9
+036_035__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,112,,,2.0
+044_945__control,NeuralTextures,1,control,0,0,0,,,250,,,5.0
+044_945__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,4.8
+044_945__fade8,NeuralTextures,1,fade,8,124,132,128,124,124,128,,4.9
+044_945__fade16,NeuralTextures,1,fade,16,120,136,128,126,121,128,,5.5
+044_945__dissolve8,NeuralTextures,1,dissolve,8,124,132,,,124,,,5.2
+044_945__fade32,NeuralTextures,1,fade,32,112,144,127,127,115 133,128,,5.5
+044_945__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,120 250,,,4.1
+044_945__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,112 250,,,4.0
+044_945__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,250,,,4.0
+047_862__control,NeuralTextures,1,control,0,0,0,,,,,,2.2
+047_862__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,2.3
+047_862__fade8,NeuralTextures,1,fade,8,124,132,127,127,124,128,,2.1
+047_862__fade16,NeuralTextures,1,fade,16,120,136,127,127,123,128,,2.4
+047_862__fade32,NeuralTextures,1,fade,32,112,144,127,126,125,128,,2.5
+047_862__dissolve8,NeuralTextures,1,dissolve,8,124,132,,,124,,,2.4
+047_862__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,135,,,2.6
+047_862__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,2.6
+047_862__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,,,,2.6
+048_029__control,NeuralTextures,1,control,0,0,0,,,59,,,2.1
+048_029__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,59 128,,,2.3
+048_029__fade8,NeuralTextures,1,fade,8,124,132,127,126,59 124,128,,2.3
+048_029__fade16,NeuralTextures,1,fade,16,120,136,127,126,59 123,129,,2.1
+048_029__fade32,NeuralTextures,1,fade,32,112,144,127,126,59 123,129,,1.8
+048_029__dissolve8,NeuralTextures,1,dissolve,8,124,132,,131,59 124,,,1.7
+048_029__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,59 128,,,1.2
+048_029__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,59 139,,,1.3
+048_029__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,59 153,,,1.4
+073_024__control,NeuralTextures,1,control,0,0,0,,,,,,4.2
+073_024__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,4.3
+073_024__fade8,NeuralTextures,1,fade,8,124,132,127,127,124,127,,4.7
+073_024__fade16,NeuralTextures,1,fade,16,120,136,127,127,124,128,,3.9
+073_024__fade32,NeuralTextures,1,fade,32,112,144,127,126,122,128,,3.9
+073_024__dissolve8,NeuralTextures,1,dissolve,8,124,132,,,124,,,4.1
+073_024__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,135,,,3.9
+073_024__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,,,,4.0
+073_024__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,4.1
+078_955__control,NeuralTextures,1,control,0,0,0,,,,,,4.2
+078_955__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,4.3
+078_955__fade8,NeuralTextures,1,fade,8,124,132,127,126,124,128,,5.1
+078_955__fade16,NeuralTextures,1,fade,16,120,136,127,127,123,128,,5.1
+078_955__fade32,NeuralTextures,1,fade,32,112,144,127,127,123,128,,5.2
+078_955__dissolve8,NeuralTextures,1,dissolve,8,124,132,,124,124,,,4.9
+078_955__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,120,,,4.9
+078_955__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,,,,5.0
+102_114__control,NeuralTextures,1,control,0,0,0,,,,,,2.5
+102_114__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,2.5
+078_955__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,6.2
+102_114__fade8,NeuralTextures,1,fade,8,124,132,128,127,124,128,,2.5
+102_114__fade16,NeuralTextures,1,fade,16,120,136,128,127,123,129,,2.4
+102_114__fade32,NeuralTextures,1,fade,32,112,144,128,127,121,128,,2.4
+102_114__dissolve8,NeuralTextures,1,dissolve,8,124,132,,126,124,,,2.1
+102_114__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,120,,,2.2
+102_114__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,,,,2.3
+102_114__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,2.1
+114_102__control,NeuralTextures,1,control,0,0,0,,,250,,,2.1
+114_102__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,1.9
+114_102__fade8,NeuralTextures,1,fade,8,124,132,127,126,124,128,,2.2
+114_102__fade16,NeuralTextures,1,fade,16,120,136,127,126,121,128,,2.3
+114_102__fade32,NeuralTextures,1,fade,32,112,144,126,126,120 138,127,,2.3
+114_102__dissolve8,NeuralTextures,1,dissolve,8,124,132,,124,124,,,2.5
+114_102__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,120 136 250,,,2.3
+114_102__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,112 129 250,,,2.5
+114_102__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,96,,,2.7
+128_896__control,NeuralTextures,1,control,0,0,0,,,,,,3.1
+128_896__hard_cut,NeuralTextures,1,hard_cut,0,128,128,128,128,128,,,2.9
+128_896__fade8,NeuralTextures,1,fade,8,124,132,128,124,124,127,,2.4
+128_896__fade16,NeuralTextures,1,fade,16,120,136,127,127,121,128,,2.0
+128_896__fade32,NeuralTextures,1,fade,32,112,144,127,126,116,128,,2.0
+128_896__dissolve8,NeuralTextures,1,dissolve,8,124,132,,124,124,,,2.0
+128_896__dissolve16,NeuralTextures,1,dissolve,16,120,136,,,120,,,2.0
+128_896__dissolve32,NeuralTextures,1,dissolve,32,112,144,,,112,,,2.1
+128_896__dissolve64,NeuralTextures,1,dissolve,64,96,160,,,,,,2.0

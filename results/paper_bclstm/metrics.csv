@@ -1,0 +1,2 @@
+epoch,accuracy,precision,recall,f1,auc,tp,fp,tn,fn,train_minutes
+1,0.98,0.9705882352941176,0.99,0.9801980198019802,0.997,99,3,97,1,63.2
