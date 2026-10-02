@@ -24,7 +24,7 @@
 | 3 | 전환 벤치마크 (Cut / Fade / Dissolve), 정규화와 FTCN 점수 검증 | 완료 |
 | 4 | 샷 분할 기준선 (PySceneDetect) | 완료 |
 | 5 | 배경 기준 정규화 모델 | 진행 중 |
-| 6 | FTCN 일반성 검증 | 예정 |
+| 6 | FTCN 일반성 검증 (원 논문 모델로도 채점) | 예비 결과 |
 | 7 | 교차 데이터셋 평가 (FF++ → Celeb-DF) | 예정 |
 
 ## 문서
@@ -34,6 +34,7 @@
 | [docs/00_setup_checklist.md](docs/00_setup_checklist.md) | 받아야 할 데이터와 가중치, 설치할 패키지, 환경에서 확인한 제약 |
 | [docs/01_진행현황.md](docs/01_진행현황.md) | 단계별 상태, 주요 결과 해설, 코드 지도, 겪은 문제와 대처 |
 | [docs/02_실험결과.md](docs/02_실험결과.md) | 실험 수치 모음과 재현 명령 |
+| [docs/04_5단계_설계.md](docs/04_5단계_설계.md) | 제안 모델 설계안: 구조, 비교할 기준선, 평가 프로토콜, 구현 순서 |
 | [docs/03_초기_장면탐지_실험.md](docs/03_초기_장면탐지_실험.md) | 초기 프로토타입(밝기 차이 기반 장면 탐지)과 기본 용어 설명. 예전 README |
 
 ## 저장소 구조
@@ -75,6 +76,10 @@ python models/ftcn_runner.py \
     --out-dir D:/Graduation-project-data/processed/benchmark/ftcn
 python scripts/analyze_benchmark_ftcn.py
 python scripts/compare_ftcn_signals.py
+
+# 3-2) 같은 클립을 원 논문 모델로도 채점 (6단계, 전처리 1분 + 채점 2분)
+python preprocessing/benchmark_faces.py --manifest D:/Graduation-project-data/processed/benchmark/manifest_pass1.csv
+python scripts/score_benchmark_paper.py --checkpoint D:/Graduation-project-data/checkpoints/paper_bclstm/paper_repro/epoch_01.pt
 
 # 4) 샷 분할 기준선
 python scripts/detect_shots_benchmark.py
