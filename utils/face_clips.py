@@ -4,6 +4,8 @@
 #   load_index         : index.csv 에서 원하는 분할(train / test 등)의 영상 행만 읽습니다.
 #   usable_rows        : 전처리 결과가 아직 없거나 실패한 영상을 뺍니다.
 #   FaceClipDataset    : 영상 하나 → (얼굴 크롭 [F, H, W, 3] uint8 텐서, 라벨, video_id)
+#                        with_thumbs=True 면 배경 썸네일([F, h, w])도 함께 돌려줍니다(5단계 전역 분기 입력).
+#                        augment 를 주면 학습 중에 장면 전환을 넣습니다(utils/transition_augment.py).
 #   PairedBatchSampler : 원 논문 Table 4 처럼 real 1개 + fake 1개를 한 배치로 묶습니다.
 #
 # 알아두면 좋은 개념
@@ -52,21 +54,33 @@ def usable_rows(rows, npz_root):
 
 
 # 영상 하나 = 전처리한 얼굴 크롭 frames 장. 저장된 순서(시간 순)를 그대로 돌려줍니다.
+#   augment      : utils/transition_augment.TransitionAugment. 주면 샘플마다 확률적으로 장면 전환을 넣습니다.
+#                  학습에만 씁니다. 평가에는 주지 마세요(실제로 합성한 벤치마크 클립으로 평가합니다).
+#   with_thumbs  : 배경 썸네일도 함께 돌려줍니다. 전환 증강은 얼굴과 썸네일에 같은 전환을 적용합니다.
 class FaceClipDataset(Dataset):
-    def __init__(self, rows, npz_root, frames=30):
+    def __init__(self, rows, npz_root, frames=30, augment=None, with_thumbs=False):
         self.rows = rows
         self.npz_root = Path(npz_root)
         self.frames = frames
+        self.augment = augment
+        self.with_thumbs = with_thumbs
 
     def __len__(self):
         return len(self.rows)
 
     def __getitem__(self, index):
         row = self.rows[index]
+        keys = ("faces", "thumbs") if self.with_thumbs else ("faces",)
         with np.load(self.npz_root / f"{row['video_id']}.npz") as data:
-            faces = data["faces"][:self.frames]
+            sample = {key: data[key][:self.frames] for key in keys}
+        if self.augment is not None:
+            sample, _ = self.augment(sample, row)
         # torch.from_numpy: 복사 없이 같은 메모리를 텐서로 씁니다.
-        return torch.from_numpy(np.ascontiguousarray(faces)), row["label"], row["video_id"]
+        faces = torch.from_numpy(np.ascontiguousarray(sample["faces"]))
+        if not self.with_thumbs:
+            return faces, row["label"], row["video_id"]
+        thumbs = torch.from_numpy(np.ascontiguousarray(sample["thumbs"]))
+        return faces, thumbs, row["label"], row["video_id"]
 
 
 # 원 논문 Table 4 의 학습 순서를 만드는 배치 샘플러입니다.

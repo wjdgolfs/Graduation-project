@@ -125,6 +125,25 @@ paper_model:
   checkpoint_dir: "D:/Graduation-project-data/checkpoints/paper_bclstm"
   results_dir: "D:/Graduation-project-data/results/paper_bclstm"
 
+transition_augment:
+  # 전환 증강(utils/transition_augment.py): 학습 중에 같은 라벨의 다른 영상을 이어 붙여 장면 전환을 만듭니다.
+  # 5단계 기준선 B1(증강만 한 모델)과 제안 모델 학습에 씁니다. 1단계 재현과 같은 조건을 유지하려고 기본값은 끈 상태입니다.
+  enabled: false
+  # 한 샘플에 전환을 넣을 확률. 전환 없는 입력도 계속 봐야 전환 없는 영상의 성능이 유지됩니다.
+  probability: 0.5
+  # 전환 종류별 길이(프레임 수). 입력이 30프레임이라 24 보다 길면 "전환 밖" 프레임이 거의 없어집니다.
+  # hard_cut 은 길이가 없어 0 하나만 둡니다.
+  transitions:
+    hard_cut: [0]
+    fade: [8, 16, 24]
+    dissolve: [8, 16, 24]
+  # 전환 중심을 입력 가운데(15번째)에서 흔드는 범위(프레임). 모델이 위치를 외우지 않게 합니다.
+  center_jitter: 3
+  # 뒤 영상 얼굴 크롭을 흔드는 범위(크롭 크기 대비 비율). 두 얼굴이 정확히 겹친 모양을 전환 신호로 외우지 않게 합니다.
+  partner_jitter: 0.08
+  # 난수 씨앗. DataLoader 자식 프로세스마다 [seed, worker_id] 로 갈라집니다.
+  seed: 0
+
 regions:
   # 2단계 부위 신호(preprocessing/region_signals.py) 설정. 크기는 모두 얼굴 크롭(240x240) 픽셀 기준입니다.
   # 랜드마크 시간 평활 창(프레임 수). 3 이면 앞뒤 1프레임씩 함께 평균합니다. 1 이하면 끕니다.
