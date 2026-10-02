@@ -125,6 +125,18 @@ paper_model:
   checkpoint_dir: "D:/Graduation-project-data/checkpoints/paper_bclstm"
   results_dir: "D:/Graduation-project-data/results/paper_bclstm"
 
+normalized_model:
+  # 5단계 제안 모델(models/normalized_bclstm.py) 의 추가 설정입니다. 나머지(백본·ConvLSTM·학습률)는 paper_model 을 그대로 씁니다.
+  # 배경 썸네일을 맞출 크기 [세로, 가로]. 영상마다 가로세로 비가 달라(90x160, 120x160, 160x85 ...) 고정 크기로 줄여야 배치로 묶입니다.
+  thumb_size: [96, 128]
+  # 전역 분기가 내놓는 특징 길이와 게이트 MLP 의 은닉 길이
+  global_width: 64
+  gate_hidden: 64
+  # α 의 최댓값. 3단계에서 최소제곱으로 잰 고정 α 가 1.27 이라 여유를 둡니다. 시작값은 sigmoid(0) x alpha_max = 1.0 입니다.
+  alpha_max: 2.0
+  # 썸네일에서 가릴 얼굴 영역 = 얼굴 상자의 몇 배 (2단계 배경 통계와 같은 규칙)
+  background_exclusion_scale: 2.0
+
 transition_augment:
   # 전환 증강(utils/transition_augment.py): 학습 중에 같은 라벨의 다른 영상을 이어 붙여 장면 전환을 만듭니다.
   # 5단계 기준선 B1(증강만 한 모델)과 제안 모델 학습에 씁니다. 1단계 재현과 같은 조건을 유지하려고 기본값은 끈 상태입니다.

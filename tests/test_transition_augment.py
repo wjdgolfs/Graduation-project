@@ -21,7 +21,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from preprocessing.synthesize_transitions import transition_window  # noqa: E402
-from utils.face_clips import FaceClipDataset  # noqa: E402
+from utils.face_clips import ClipLoader, FaceClipDataset  # noqa: E402
 from utils.transition_augment import TransitionAugment, build_augment, shift_frames  # noqa: E402
 
 
@@ -44,9 +44,17 @@ def write_clip(root, video_id, value, frames=FRAMES):
         root / f"{video_id}.npz",
         faces=faces,
         thumbs=thumbs,
+        # 상자가 nan 이면 background_mask 가 아무것도 가리지 않습니다(이 테스트는 전환만 봅니다).
+        smoothed_boxes=np.full((frames, 4), np.nan, dtype=np.float32),
+        thumb_scale=np.float32(1.0),
         face_found=np.ones(frames, dtype=bool),
         error=np.array(""),
     )
+
+
+# 테스트용 읽기 객체. 썸네일은 저장한 크기(8x10) 그대로 두어 값 비교가 쉽도록 합니다.
+def loader(root, with_thumbs=True):
+    return ClipLoader(root, FRAMES, with_thumbs=with_thumbs, thumb_size=(8, 10))
 
 
 @pytest.fixture
@@ -66,7 +74,7 @@ def clips(tmp_path):
 # 같은 기법·라벨 안에서만 짝을 고릅니다. 자기 자신은 고르지 않습니다.
 def test_partner_has_same_source_and_label(clips):
     rows, root = clips
-    augment = TransitionAugment(rows, root, SETTINGS, FRAMES)
+    augment = TransitionAugment(rows, loader(root), SETTINGS)
     lookup = {row["video_id"]: row for row in rows}
 
     for row in rows:
@@ -83,7 +91,7 @@ def test_partner_has_same_source_and_label(clips):
 # 짝이 없으면 원본을 그대로 돌려줍니다(증강 때문에 학습이 멈추면 안 됩니다).
 def test_no_partner_returns_original(clips):
     rows, root = clips
-    augment = TransitionAugment(rows, root, SETTINGS, FRAMES)
+    augment = TransitionAugment(rows, loader(root), SETTINGS)
     row = next(row for row in rows if row["video_id"] == "f2f_a")
     with np.load(root / "f2f_a.npz") as data:
         faces = data["faces"][:FRAMES]
@@ -97,7 +105,7 @@ def test_no_partner_returns_original(clips):
 # 얼굴과 썸네일에 같은 전환이 들어가야 합니다. 전환 구간 밖은 양쪽 모두 원본과 같아야 합니다.
 def test_faces_and_thumbs_share_the_same_window(clips):
     rows, root = clips
-    augment = TransitionAugment(rows, root, SETTINGS, FRAMES)
+    augment = TransitionAugment(rows, loader(root), SETTINGS)
     row = next(row for row in rows if row["video_id"] == "real_a")
     with np.load(root / "real_a.npz") as data:
         original = {"faces": data["faces"][:FRAMES], "thumbs": data["thumbs"][:FRAMES]}
@@ -127,7 +135,7 @@ def test_faces_and_thumbs_share_the_same_window(clips):
 def test_dissolve_midpoint_is_the_average(clips):
     rows, root = clips
     settings = dict(SETTINGS, transitions={"dissolve": [8]}, center_jitter=0)
-    augment = TransitionAugment(rows, root, settings, FRAMES)
+    augment = TransitionAugment(rows, loader(root), settings)
     row = next(row for row in rows if row["video_id"] == "real_a")
     with np.load(root / "real_a.npz") as data:
         faces = data["faces"][:FRAMES]
@@ -147,7 +155,7 @@ def test_dissolve_midpoint_is_the_average(clips):
 # probability 0 이면 아무것도 건드리지 않습니다.
 def test_probability_zero_keeps_original(clips):
     rows, root = clips
-    augment = TransitionAugment(rows, root, dict(SETTINGS, probability=0.0), FRAMES)
+    augment = TransitionAugment(rows, loader(root), dict(SETTINGS, probability=0.0))
     row = rows[0]
     with np.load(root / "real_a.npz") as data:
         faces = data["faces"][:FRAMES]
@@ -161,15 +169,15 @@ def test_probability_zero_keeps_original(clips):
 # build_augment 는 enabled 가 꺼져 있으면 None 을 돌려줍니다(1단계 재현과 같은 조건).
 def test_build_augment_respects_enabled(clips):
     rows, root = clips
-    assert build_augment(dict(SETTINGS, enabled=False), rows, root, FRAMES) is None
-    assert build_augment(SETTINGS, rows, root, FRAMES) is not None
+    assert build_augment(dict(SETTINGS, enabled=False), rows, loader(root)) is None
+    assert build_augment(SETTINGS, rows, loader(root)) is not None
 
 
 # 데이터셋이 증강을 통과시키고, with_thumbs 로 썸네일까지 돌려줍니다.
 def test_dataset_applies_augment_and_returns_thumbs(clips):
     rows, root = clips
-    augment = TransitionAugment(rows, root, SETTINGS, FRAMES)
-    dataset = FaceClipDataset(rows, root, FRAMES, augment=augment, with_thumbs=True)
+    augment = TransitionAugment(rows, loader(root), SETTINGS)
+    dataset = FaceClipDataset(rows, loader(root), augment=augment)
 
     faces, thumbs, label, video_id = dataset[0]
 
@@ -181,7 +189,7 @@ def test_dataset_applies_augment_and_returns_thumbs(clips):
     assert faces[-1, 0, 0, 0].item() != 10
 
     # 증강을 주지 않으면 예전 형태(3개)를 그대로 돌려줍니다.
-    plain = FaceClipDataset(rows, root, FRAMES)[0]
+    plain = FaceClipDataset(rows, ClipLoader(root, FRAMES))[0]
     assert len(plain) == 3
     assert plain[0][-1, 0, 0, 0].item() == 10
 

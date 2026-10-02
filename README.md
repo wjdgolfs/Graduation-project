@@ -41,9 +41,9 @@
 
 ```
 preprocessing/   영상 → 얼굴 크롭·랜드마크·배경 통계, 부위 신호, 전환 벤치마크 생성
-models/          원 논문 재현 모델(Xception + CBAM + Bi-ConvLSTM), FTCN 실행 래퍼
+models/          원 논문 재현 모델(Xception + CBAM + Bi-ConvLSTM), 제안 모델, FTCN 실행 래퍼
 scripts/         학습·분석·다운로드·가중치 준비 스크립트
-tests/           단위 테스트 55개 (전환 계산, 부위 마스크, 모델 구조, 다운로드 재시도)
+tests/           단위 테스트 63개 (전환 계산, 부위 마스크, 모델 구조, 다운로드 재시도)
 configs/         모든 경로와 기준값이 모인 config.yaml
 results/         실험 결과 CSV (용량이 작은 것만 저장소에 포함)
 docs/            위 문서들

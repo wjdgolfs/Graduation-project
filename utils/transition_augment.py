@@ -72,11 +72,13 @@ def transition_choices(settings):
 
 
 class TransitionAugment:
-    # rows: 짝으로 쓸 수 있는 영상 목록(학습 분할). npz_root: 전처리 결과 폴더.
-    def __init__(self, rows, npz_root, settings, frames=30):
-        self.npz_root = Path(npz_root)
+    # rows   : 짝으로 쓸 수 있는 영상 목록(학습 분할)
+    # loader : utils.face_clips.ClipLoader. 짝 영상도 본 영상과 같은 준비 과정을 거쳐야 섞을 수 있습니다
+    #          (배경 가리기, 썸네일 크기 맞추기). 그래서 읽기를 직접 하지 않고 같은 loader 를 씁니다.
+    def __init__(self, rows, loader, settings):
+        self.loader = loader
         self.settings = settings
-        self.frames = frames
+        self.frames = loader.frames
         self.probability = float(settings["probability"])
         self.choices = transition_choices(settings)
         self.center_jitter = int(settings["center_jitter"])
@@ -117,23 +119,6 @@ class TransitionAugment:
             return None
         return pool[self.rng().integers(len(pool))]
 
-    # 짝 영상에서 필요한 배열만 읽습니다. 읽을 수 없으면 None 입니다.
-    def load_partner(self, video_id, keys):
-        path = self.npz_root / f"{video_id}.npz"
-        try:
-            with np.load(path) as data:
-                if str(data["error"]).strip():
-                    return None
-                arrays = {}
-                for key in keys:
-                    array = data[key][:self.frames]
-                    if len(array) < self.frames:
-                        return None
-                    arrays[key] = array
-                return arrays
-        except (OSError, KeyError):
-            return None
-
     # 전환 중심을 고릅니다. 전환 구간이 입력 안에 다 들어오도록 범위를 좁힌 뒤 흔듭니다.
     def pick_center(self, length):
         low = length // 2
@@ -155,8 +140,8 @@ class TransitionAugment:
         partner_id = self.pick_partner(row)
         if partner_id is None:
             return sample, None
-        partner = self.load_partner(partner_id, tuple(sample.keys()))
-        if partner is None:
+        partner = self.loader(partner_id)
+        if partner is None or any(key not in partner for key in sample):
             return sample, None
 
         kind, length = self.choices[rng.integers(len(self.choices))]
@@ -192,7 +177,7 @@ class TransitionAugment:
 
 
 # config.yaml 의 transition_augment 설정으로 증강기를 만듭니다. enabled 가 false 면 None 을 돌려줍니다.
-def build_augment(settings, rows, npz_root, frames=30):
+def build_augment(settings, rows, loader):
     if not settings or not settings.get("enabled"):
         return None
-    return TransitionAugment(rows, npz_root, settings, frames)
+    return TransitionAugment(rows, loader, settings)

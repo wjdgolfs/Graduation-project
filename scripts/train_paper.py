@@ -43,7 +43,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from models.paper_bclstm import build_model, prepare_clips  # noqa: E402
-from utils.face_clips import FaceClipDataset, PairedBatchSampler, load_index, usable_rows  # noqa: E402
+from utils.face_clips import ClipLoader, FaceClipDataset, PairedBatchSampler, load_index, usable_rows  # noqa: E402
 from utils.metrics import classification_metrics, format_metrics  # noqa: E402
 
 
@@ -141,8 +141,10 @@ def main():
         "pin_memory": True,
         "persistent_workers": settings["num_workers"] > 0,
     }
+    # 영상 하나를 어떻게 읽을지 정하는 객체. 학습·평가·전환 증강이 모두 같은 것을 씁니다.
+    clip_loader = ClipLoader(npz_root, settings["frames"])
     test_loader = DataLoader(
-        FaceClipDataset(splits["test"], npz_root, settings["frames"]),
+        FaceClipDataset(splits["test"], clip_loader),
         batch_size=2 * settings["pairs_per_batch"],
         shuffle=False,
         **loader_options,
@@ -166,7 +168,7 @@ def main():
     # 3) 학습 준비
     sampler = PairedBatchSampler([row["label"] for row in splits["train"]], settings["pairs_per_batch"], settings["seed"])
     train_loader = DataLoader(
-        FaceClipDataset(splits["train"], npz_root, settings["frames"]),
+        FaceClipDataset(splits["train"], clip_loader),
         batch_sampler=sampler,
         **loader_options,
     )
