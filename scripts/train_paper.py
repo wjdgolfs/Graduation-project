@@ -1,5 +1,5 @@
 # ============================================================================
-# 원 논문 재현: XceptionNet + CBAM + Bi-ConvLSTM 학습과 평가 (Celeb-DF)
+# 학습과 평가: 원 논문 재현 모델(1단계)과 배경 기준 정규화 모델(5단계)
 # ----------------------------------------------------------------------------
 # 무엇을 하나
 #   1) 얼굴 전처리 결과(index.csv 와 영상별 .npz)에서 논문 방식 분할(split 열)의 train / test 영상을 읽습니다.
@@ -12,6 +12,12 @@
 #   python scripts/train_paper.py                                     설정대로 학습
 #   python scripts/train_paper.py --resume <체크포인트.pt>             저장된 에폭 다음부터 이어서 학습
 #   python scripts/train_paper.py --evaluate <체크포인트.pt>           테스트만
+#
+# 5단계 기준선과 제안 모델 (docs/04_5단계_설계.md)
+#   B0  python scripts/train_paper.py --dataset ffpp --run-name b0_ffpp
+#   B1  python scripts/train_paper.py --dataset ffpp --run-name b1_augment --augment
+#   P   python scripts/train_paper.py --dataset ffpp --run-name p_normalized --augment --model normalized
+#   --model normalized 이면 배경 썸네일을 함께 읽어 모델에 넣고, 예측 CSV 에 영상별 평균 α 를 적습니다.
 #
 # 출력 (<run> = --run-name)
 #   paper_model.checkpoint_dir/<run>/epoch_XX.pt         모델·옵티마이저 상태, 설정, 테스트 지표
@@ -42,9 +48,11 @@ CONFIG_PATH = PROJECT_ROOT / "configs" / "config.yaml"
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+from models.normalized_bclstm import build_normalized_model  # noqa: E402
 from models.paper_bclstm import build_model, prepare_clips  # noqa: E402
 from utils.face_clips import ClipLoader, FaceClipDataset, PairedBatchSampler, load_index, usable_rows  # noqa: E402
 from utils.metrics import classification_metrics, format_metrics  # noqa: E402
+from utils.transition_augment import build_augment  # noqa: E402
 
 
 METRIC_COLUMNS = ["epoch", "accuracy", "precision", "recall", "f1", "auc", "tp", "fp", "tn", "fn", "train_minutes"]
@@ -68,30 +76,58 @@ def set_seed(seed):
     torch.manual_seed(seed)
 
 
-# 테스트 영상 전체의 fake 확률을 구합니다. 반환값: (video_id 목록, 라벨 목록, fake 확률 목록)
+# 배치에서 (얼굴, 썸네일 또는 None, 라벨, video_id) 를 꺼냅니다. 제안 모델은 썸네일이 하나 더 붙습니다.
+def split_batch(batch):
+    if len(batch) == 4:
+        return batch
+    faces, labels, video_ids = batch
+    return faces, None, labels, video_ids
+
+
+# 한 배치를 모델에 넣습니다. 반환값: (로짓, α 또는 None)
+# 제안 모델만 썸네일을 받고 α 를 돌려줍니다.
+def forward_batch(model, faces, thumbs, device, amp, return_alpha=False):
+    clips = prepare_clips(faces.to(device, non_blocking=True))
+    with torch.autocast(device_type="cuda", dtype=torch.bfloat16, enabled=amp):
+        if thumbs is None:
+            return model(clips), None
+        if return_alpha:
+            return model(clips, thumbs.to(device, non_blocking=True), return_alpha=True)
+        return model(clips, thumbs.to(device, non_blocking=True)), None
+
+
+# 테스트 영상 전체의 fake 확률을 구합니다. 반환값: (video_id 목록, 라벨 목록, fake 확률 목록, 영상별 평균 α 목록 또는 None)
 # @torch.no_grad(): 이 함수 안에서는 기울기를 계산하지 않아 메모리와 시간을 아낍니다.
 @torch.no_grad()
-def predict(model, loader, device, amp):
+def predict(model, loader, device, amp, max_batches=None):
     model.eval()
-    video_ids, labels, probabilities = [], [], []
-    for faces, batch_labels, batch_ids in tqdm(loader, desc="test", leave=False):
-        clips = prepare_clips(faces.to(device, non_blocking=True))
-        with torch.autocast(device_type="cuda", dtype=torch.bfloat16, enabled=amp):
-            logits = model(clips)
+    video_ids, labels, probabilities, alphas = [], [], [], []
+    for index, batch in enumerate(tqdm(loader, desc="test", leave=False), start=1):
+        faces, thumbs, batch_labels, batch_ids = split_batch(batch)
+        logits, alpha = forward_batch(model, faces, thumbs, device, amp, return_alpha=True)
         # softmax 로 두 로짓을 합이 1 인 확률로 바꾸고, 1번(fake) 확률만 모읍니다.
         probabilities += torch.softmax(logits.float(), dim=1)[:, 1].tolist()
         labels += batch_labels.tolist()
         video_ids += list(batch_ids)
+        if alpha is not None:
+            # 영상마다 프레임 평균 하나로 줄입니다. 프레임별 값은 학습이 끝난 뒤 따로 분석합니다.
+            alphas += alpha.float().mean(dim=1).tolist()
+        if max_batches is not None and index >= max_batches:
+            break
     model.train()
-    return video_ids, labels, probabilities
+    return video_ids, labels, probabilities, (alphas or None)
 
 
-def write_predictions(path, video_ids, labels, probabilities):
+def write_predictions(path, video_ids, labels, probabilities, alphas=None):
     with open(path, "w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow(["video_id", "label", "prob_fake", "prediction"])
-        for video_id, label, probability in zip(video_ids, labels, probabilities):
-            writer.writerow([video_id, label, f"{probability:.6f}", int(probability >= 0.5)])
+        columns = ["video_id", "label", "prob_fake", "prediction"] + (["alpha_mean"] if alphas else [])
+        writer.writerow(columns)
+        for index, (video_id, label, probability) in enumerate(zip(video_ids, labels, probabilities)):
+            row = [video_id, label, f"{probability:.6f}", int(probability >= 0.5)]
+            if alphas:
+                row.append(f"{alphas[index]:.4f}")
+            writer.writerow(row)
 
 
 # CSV 파일 끝에 한 줄을 붙입니다. 파일이 없으면 머리글부터 씁니다.
@@ -110,13 +146,34 @@ def main():
     parser.add_argument("--resume", default=None, help="이 체크포인트(.pt)의 다음 에폭부터 이어서 학습합니다.")
     parser.add_argument("--evaluate", default=None, help="이 체크포인트(.pt)로 테스트만 합니다.")
     parser.add_argument("--max-steps", type=int, default=None, help="에폭마다 이 스텝 수까지만 학습합니다(시험용).")
+    parser.add_argument("--max-eval", type=int, default=None, help="테스트를 이 배치 수까지만 합니다(시험용).")
     parser.add_argument("--no-pretrained", action="store_true", help="XceptionNet 을 ImageNet 가중치 없이 시작합니다(시험용).")
+    parser.add_argument("--model", choices=["paper", "normalized"], default="paper",
+                        help="paper: 원 논문 모델 / normalized: 5단계 제안 모델(배경 분기 + 학습되는 α)")
+    parser.add_argument("--dataset", default=None, help="학습에 쓸 데이터셋 폴더 이름 (기본: paper_model.dataset)")
+    parser.add_argument("--epochs", type=int, default=None, help="에폭 수 (기본: paper_model.epochs)")
+    parser.add_argument("--augment", dest="augment", action="store_true", default=None,
+                        help="전환 증강을 켭니다(기준선 B1, 제안 모델 학습).")
+    parser.add_argument("--no-augment", dest="augment", action="store_false",
+                        help="설정에서 켜져 있어도 전환 증강을 끕니다.")
     args = parser.parse_args()
 
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA GPU 가 필요합니다.")
     config = load_config()
-    settings = config["paper_model"]
+    settings = dict(config["paper_model"])
+    extra = config["normalized_model"]
+    # 명령줄로 준 값이 설정값을 덮습니다. 체크포인트에도 이 settings 가 그대로 저장됩니다.
+    if args.dataset:
+        settings["dataset"] = args.dataset
+    if args.epochs:
+        settings["epochs"] = args.epochs
+    settings["model_kind"] = args.model
+    # 증강은 --augment / --no-augment 가 없으면 설정값(transition_augment.enabled)을 따릅니다.
+    augment_settings = dict(config["transition_augment"])
+    if args.augment is not None:
+        augment_settings["enabled"] = args.augment
+    settings["transition_augment"] = augment_settings
     device = torch.device("cuda")
     amp = settings["amp"]
     set_seed(settings["seed"])
@@ -142,7 +199,15 @@ def main():
         "persistent_workers": settings["num_workers"] > 0,
     }
     # 영상 하나를 어떻게 읽을지 정하는 객체. 학습·평가·전환 증강이 모두 같은 것을 씁니다.
-    clip_loader = ClipLoader(npz_root, settings["frames"])
+    # 제안 모델은 배경 썸네일도 필요합니다(얼굴 자리를 가리고 고정 크기로 맞춰 읽습니다).
+    clip_loader = ClipLoader(
+        npz_root,
+        settings["frames"],
+        with_thumbs=args.model == "normalized",
+        thumb_size=extra["thumb_size"],
+        exclusion_scale=extra["background_exclusion_scale"],
+    )
+    # 평가에는 증강을 쓰지 않습니다(전환 강건성은 실제로 합성한 벤치마크 클립으로 잽니다).
     test_loader = DataLoader(
         FaceClipDataset(splits["test"], clip_loader),
         batch_size=2 * settings["pairs_per_batch"],
@@ -151,7 +216,11 @@ def main():
     )
 
     # 2) 모델. 테스트만 할 때는 체크포인트가 모든 가중치를 덮으므로 ImageNet 가중치를 읽지 않습니다.
-    model = build_model(settings, pretrained=not (args.no_pretrained or args.evaluate)).to(device)
+    pretrained = not (args.no_pretrained or args.evaluate)
+    if args.model == "normalized":
+        model = build_normalized_model(settings, extra, pretrained=pretrained).to(device)
+    else:
+        model = build_model(settings, pretrained=pretrained).to(device)
     checkpoint_dir = Path(settings["checkpoint_dir"]) / args.run_name
     results_dir = Path(settings["results_dir"]) / args.run_name
     results_dir.mkdir(parents=True, exist_ok=True)
@@ -160,15 +229,21 @@ def main():
         # weights_only=True: 가중치·숫자·문자열만 읽고, 파일 안의 임의 파이썬 코드는 실행하지 않습니다.
         state = torch.load(args.evaluate, map_location="cpu", weights_only=True)
         model.load_state_dict(state["model"])
-        video_ids, labels, probabilities = predict(model, test_loader, device, amp)
-        write_predictions(results_dir / f"predictions_{Path(args.evaluate).stem}.csv", video_ids, labels, probabilities)
+        video_ids, labels, probabilities, alphas = predict(model, test_loader, device, amp, args.max_eval)
+        write_predictions(results_dir / f"predictions_{Path(args.evaluate).stem}.csv",
+                          video_ids, labels, probabilities, alphas)
         print(format_metrics(classification_metrics(labels, probabilities)))
         return
 
     # 3) 학습 준비
     sampler = PairedBatchSampler([row["label"] for row in splits["train"]], settings["pairs_per_batch"], settings["seed"])
+    # 전환 증강: 학습 분할 안에서만 짝을 찾습니다(테스트 영상이 학습에 섞이지 않게).
+    augment = build_augment(augment_settings, splits["train"], clip_loader)
+    if augment is not None:
+        kinds = ", ".join(f"{kind} {lengths}" for kind, lengths in augment_settings["transitions"].items())
+        print(f"전환 증강 켜짐: 확률 {augment_settings['probability']}, {kinds}")
     train_loader = DataLoader(
-        FaceClipDataset(splits["train"], clip_loader),
+        FaceClipDataset(splits["train"], clip_loader, augment=augment),
         batch_sampler=sampler,
         **loader_options,
     )
@@ -194,13 +269,12 @@ def main():
         started = time.time()
         running_loss = running_correct = running_count = 0
         progress = tqdm(train_loader, total=steps_per_epoch, desc=f"epoch {epoch + 1}/{settings['epochs']}")
-        for step, (faces, labels, _) in enumerate(progress, start=1):
+        for step, batch in enumerate(progress, start=1):
+            faces, thumbs, labels, _ = split_batch(batch)
             # non_blocking=True: pin_memory 된 텐서를 기다리지 않고 GPU 로 보냅니다.
-            clips = prepare_clips(faces.to(device, non_blocking=True))
-            labels = labels.to(device, non_blocking=True)
             # autocast: 합성곱 같은 연산을 bf16(16비트)으로 계산해 메모리와 시간을 줄입니다. 손실은 float32 로 계산합니다.
-            with torch.autocast(device_type="cuda", dtype=torch.bfloat16, enabled=amp):
-                logits = model(clips)
+            labels = labels.to(device, non_blocking=True)
+            logits, _alpha = forward_batch(model, faces, thumbs, device, amp)
             loss = criterion(logits.float(), labels)
 
             # 기울기 초기화 → 역전파로 기울기 계산 → 가중치 갱신
@@ -227,12 +301,15 @@ def main():
         train_minutes = (time.time() - started) / 60
 
         # 5) 에폭마다 테스트하고 저장
-        video_ids, test_labels, probabilities = predict(model, test_loader, device, amp)
+        video_ids, test_labels, probabilities, alphas = predict(model, test_loader, device, amp, args.max_eval)
         metrics = classification_metrics(test_labels, probabilities)
-        write_predictions(results_dir / f"predictions_epoch_{epoch + 1:02d}.csv", video_ids, test_labels, probabilities)
+        write_predictions(results_dir / f"predictions_epoch_{epoch + 1:02d}.csv",
+                          video_ids, test_labels, probabilities, alphas)
         append_row(results_dir / "metrics.csv", METRIC_COLUMNS, {"epoch": epoch + 1, **metrics, "train_minutes": round(train_minutes, 1)})
         torch.save(
-            {"model": model.state_dict(), "optimizer": optimizer.state_dict(), "epoch": epoch, "settings": settings, "metrics": metrics},
+            # settings 에 model_kind 와 증강 설정이 들어 있어, 나중에 체크포인트만 보고 같은 모델을 다시 만들 수 있습니다.
+            {"model": model.state_dict(), "optimizer": optimizer.state_dict(), "epoch": epoch,
+             "settings": settings, "extra": extra, "metrics": metrics},
             checkpoint_dir / f"epoch_{epoch + 1:02d}.pt",
         )
         print(f"[epoch {epoch + 1}] {format_metrics(metrics)} | 학습 {train_minutes:.1f}분")
