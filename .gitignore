@@ -36,3 +36,11 @@ third_party/
 
 # FaceForensics++ download script issued per user (do not publish)
 scripts/download_faceforensics.py
+
+# 외부 공개 코드(라이선스가 달라 저장소에 포함하지 않습니다)
+third_party/
+
+# 워드 문서는 저장소에 올리지 않습니다. 초고와 자료조사는 파일로만 주고받습니다.
+*.docx
+*.doc
+~$*

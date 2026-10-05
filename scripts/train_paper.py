@@ -28,6 +28,7 @@
 
 import argparse
 import csv
+import os
 import random
 import sys
 import time
@@ -128,6 +129,24 @@ def write_predictions(path, video_ids, labels, probabilities, alphas=None):
             if alphas:
                 row.append(f"{alphas[index]:.4f}")
             writer.writerow(row)
+
+
+# 체크포인트를 안전하게 저장합니다.
+# 임시 이름으로 쓴 뒤 바꾸고(중간에 끊겨도 반쯤 쓴 파일이 완성본 이름으로 남지 않음), 다시 읽어 확인합니다.
+# 2026-10-03 에 학습이 끝난 뒤 체크포인트가 84%만 쓰인 채 남아(417MB / 475MB) 다시 학습해야 했습니다.
+def save_checkpoint(path, state):
+    path = Path(path)
+    temporary = path.with_suffix(".tmp.pt")
+    torch.save(state, temporary)
+    try:
+        check = torch.load(temporary, map_location="cpu", weights_only=True)
+        if "model" not in check or "epoch" not in check:
+            raise RuntimeError("저장한 체크포인트에 필요한 항목이 없습니다.")
+        del check
+    except Exception as error:
+        raise RuntimeError(f"체크포인트를 저장했지만 다시 읽지 못했습니다: {temporary}") from error
+    os.replace(temporary, path)
+    print(f"체크포인트 저장 확인: {path.name} ({path.stat().st_size / 2**20:.0f}MB)")
 
 
 # CSV 파일 끝에 한 줄을 붙입니다. 파일이 없으면 머리글부터 씁니다.
@@ -306,11 +325,11 @@ def main():
         write_predictions(results_dir / f"predictions_epoch_{epoch + 1:02d}.csv",
                           video_ids, test_labels, probabilities, alphas)
         append_row(results_dir / "metrics.csv", METRIC_COLUMNS, {"epoch": epoch + 1, **metrics, "train_minutes": round(train_minutes, 1)})
-        torch.save(
-            # settings 에 model_kind 와 증강 설정이 들어 있어, 나중에 체크포인트만 보고 같은 모델을 다시 만들 수 있습니다.
+        # settings 에 model_kind 와 증강 설정이 들어 있어, 나중에 체크포인트만 보고 같은 모델을 다시 만들 수 있습니다.
+        save_checkpoint(
+            checkpoint_dir / f"epoch_{epoch + 1:02d}.pt",
             {"model": model.state_dict(), "optimizer": optimizer.state_dict(), "epoch": epoch,
              "settings": settings, "extra": extra, "metrics": metrics},
-            checkpoint_dir / f"epoch_{epoch + 1:02d}.pt",
         )
         print(f"[epoch {epoch + 1}] {format_metrics(metrics)} | 학습 {train_minutes:.1f}분")
 
